@@ -12,15 +12,15 @@ class AlphabetActivity : AppCompatActivity() {
         binding = ActivityAlphabetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val fragmentManager = supportFragmentManager
-        val alphabetFragment = AlphabetFragment()
-        val fragment = fragmentManager.findFragmentByTag(alphabetFragment::class.java.simpleName)
-        if (fragment !is AlphabetFragment) {
-            fragmentManager
-                .beginTransaction()
-                .add(R.id.frame_container, alphabetFragment, alphabetFragment::class.java.simpleName)
-                .commit()
-        }
+//        val fragmentManager = supportFragmentManager
+//        val alphabetFragment = AlphabetFragment()
+//        val fragment = fragmentManager.findFragmentByTag(alphabetFragment::class.java.simpleName)
+//        if (fragment !is AlphabetFragment) {
+//            fragmentManager
+//                .beginTransaction()
+//                .add(R.id.frame_container, alphabetFragment, alphabetFragment::class.java.simpleName)
+//                .commit()
+//        }
 
     }
 }

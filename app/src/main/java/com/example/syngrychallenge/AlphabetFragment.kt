@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.syngrychallenge.adapter.AlphabetAdapter
 import com.example.syngrychallenge.databinding.FragmentAlphabetBinding
@@ -38,21 +39,11 @@ class AlphabetFragment : Fragment() {
 
         _adapter.setOnItemClickCallback(object : AlphabetAdapter.OnItemClickCallback {
             override fun onItemClicked(alphabet: AlphabetModel, context: Context) {
-                val bundle = Bundle()
-                val wordFragment = WordFragment()
-                val fragmentManager = parentFragmentManager
+                val toWordFragment =
+                    AlphabetFragmentDirections.actionAlphabetFragmentToWordFragment()
 
-                bundle.putChar(ALPHABET, alphabet.alphabet)
-                wordFragment.arguments = bundle
-                fragmentManager.beginTransaction().apply {
-                    replace(
-                        R.id.frame_container,
-                        wordFragment,
-                        wordFragment::class.java.simpleName
-                    )
-                    addToBackStack(null)
-                    commit()
-                }
+                toWordFragment.alphabet = alphabet.alphabet.toString()
+                findNavController().navigate(toWordFragment)
             }
         })
     }
@@ -64,10 +55,5 @@ class AlphabetFragment : Fragment() {
             alphabetList.add(alphabet)
         }
         return alphabetList
-    }
-
-
-    companion object {
-        const val ALPHABET = "ALPHABET"
     }
 }

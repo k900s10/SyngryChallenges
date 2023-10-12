@@ -46,11 +46,10 @@ class WordFragment : Fragment() {
     }
 
     private fun generateWordList(): List<WordModel> {
-        val bundle = arguments
-        val wordKey = bundle?.getChar(AlphabetFragment.ALPHABET)
+        val wordKey = WordFragmentArgs.fromBundle(arguments as Bundle).alphabet
         val wordListModel = WordListModel().wordAre
         val wordFiltered = wordListModel.filter {
-            it.word.startsWith(wordKey!!, true)
+            it.word.startsWith(wordKey, true)
         }
         return wordFiltered
     }

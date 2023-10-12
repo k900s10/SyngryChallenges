@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/alphabetFragment">
+
+    <fragment
+        android:id="@+id/alphabetFragment"
+        android:name="com.example.syngrychallenge.AlphabetFragment"
+        android:label="AlphabetFragment" >
+        <action
+            android:id="@+id/action_alphabetFragment_to_wordFragment"
+            app:destination="@id/wordFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/wordFragment"
+        android:name="com.example.syngrychallenge.WordFragment"
+        android:label="WordFragment">
+        <argument
+            android:name="alphabet"
+            app:argType="string"
+            android:defaultValue="null" />
+    </fragment>
+</navigation>
