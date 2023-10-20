@@ -1,3 +1,45 @@
 <resources>
     <string name="app_name">SyngryChallenge</string>
+
+    <!--  Login  -->
+    <string name="tv_login_title">Login</string>
+    <string name="et_login_id_hint">Masukkan Email</string>
+    <string name="et_login_password_hint">Masukkan Password</string>
+    <string name="btn_login">Login</string>
+    <string name="tv_login_create_account">Belum punya akun?</string>
+
+    <!--  Register  -->
+    <string name="tv_register_title">Register</string>
+    <string name="et_register_username_hint">Masukkan Username</string>
+    <string name="et_register_email_hint">Masukkan Email</string>
+    <string name="et_register_password_hint">Masukkan Password</string>
+    <string name="et_register_confirm_password_hint">Masukkan Konfirmasi Password</string>
+    <string name="btn_register">Daftar</string>
+    <string name="tv_register_navigate_to_login"> Sudah punya akun? <font fgcolor="blue">Masuk disini</font></string>
+
+    <!--  Home  -->
+    <string name="tv_Home_title">Home</string>
+    <string name="tv_home_username">Welcome, %1$s</string>
+    <string name="tv_home_logout">Logout</string>
+    <!--  Home  delete data-->
+    <string name="tv_home_delete_data_label">Hapus Data</string>
+    <string name="btn_home_delete_data_true">HAPUS</string>
+    <string name="btn_home_delete_data_false">CANCEL</string>
+    <!--  Home  add data-->
+    <string name="tv_home_input_data_label">Input Data</string>
+    <string name="et_home_input_data_title_hint">Masukkan Judul</string>
+    <string name="et_home_input_data_note_hint">Masukkan Catatan</string>
+    <string name="btn_home_input_data">INPUT</string>
+    <!--  Home  edit data-->
+    <string name="tv_home_edit_data_label">Edit Data</string>
+    <string name="et_home_edit_data_title_hint">Masukkan Judul</string>
+    <string name="et_home_edit_data_note_hint">Masukkan Catatan</string>
+    <string name="btn_home_edit_data">EDIT</string>
+
+
+    <!--  Home  note-->
+    <string name="tv_home_note_label">Tes Pengetahuan Bidang</string>
+    <string name="tv_home_note_value">Jadi, awalnya saya cuma iseng mendaftar PLN karena memang saat itu belum ada niat untuk berkarir di perusahaan sejenis ini, karena ya saat itu masih banyak perusahaan plat merah lain yang saya inginkan. Tapi, karena saat itu teman-teman saya banyak yang mengajak saya, ya akhirnya saya daftar melalui website PLN. Saat itu saya memilih bagian manajemen SDM dan organisasi, ya karena hanya itulah bidang yang bisa jurusan saya lamar, yak, jadi di PLN kita akan langsung memilih bidang pekerjaan kita kelak, hal ini seperti Telkom, namun berbeda dengan BUMN lain seperti BI dan Pertamina dimana pada awal tahapan kita tidak memilih bidang tertentu namun akan dimasukan dalam satu program pelatihan. Setelah itu saya diminta untuk mengisi regional tempat saya melakukan seleksi, saya pun memilih Yogyakarta, karena saya bertempat tinggal di Karanganyar, dimana lebih dekat ke Yogya daripada ke Semarang :))). Oya nama rekrutmen saya adalah: REKRUTMEN PLN GROUP TINGKAT S1/D-IV D-III – YOGYAKARTA. Nah, regional ini akan berguna saat seleksi-seleksi selanjutnya dimana akan dilakukan di kota pilihan Anda, yeay!, lumayan lah ya hemat biaya transportasi yekan
+    </string>
+
 </resources>
