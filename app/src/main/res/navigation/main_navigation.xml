@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.syngrychallenge.LoginFragment"
+        android:name="com.example.syngrychallenge.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.syngrychallenge.RegisterFragment"
+        android:name="com.example.syngrychallenge.ui.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -30,12 +30,16 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.syngrychallenge.HomeFragment"
+        android:name="com.example.syngrychallenge.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <argument
+            android:name="username"
+            app:argType="string"
+            android:defaultValue="null" />
     </fragment>
 
 </navigation>

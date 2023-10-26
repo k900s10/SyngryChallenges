@@ -21,6 +21,7 @@
     <string name="tv_Home_title">Home</string>
     <string name="tv_home_username">Welcome, %1$s</string>
     <string name="tv_home_logout">Logout</string>
+    <string name="tv_home_empty_list">Note is empty</string>
     <!--  Home  delete data-->
     <string name="tv_home_delete_data_label">Hapus Data</string>
     <string name="btn_home_delete_data_true">HAPUS</string>
@@ -34,12 +35,16 @@
     <string name="tv_home_edit_data_label">Edit Data</string>
     <string name="et_home_edit_data_title_hint">Masukkan Judul</string>
     <string name="et_home_edit_data_note_hint">Masukkan Catatan</string>
-    <string name="btn_home_edit_data">EDIT</string>
-
-
+    <string name="btn_home_edit_data">UPDATE</string>
     <!--  Home  note-->
     <string name="tv_home_note_label">Tes Pengetahuan Bidang</string>
     <string name="tv_home_note_value">Jadi, awalnya saya cuma iseng mendaftar PLN karena memang saat itu belum ada niat untuk berkarir di perusahaan sejenis ini, karena ya saat itu masih banyak perusahaan plat merah lain yang saya inginkan. Tapi, karena saat itu teman-teman saya banyak yang mengajak saya, ya akhirnya saya daftar melalui website PLN. Saat itu saya memilih bagian manajemen SDM dan organisasi, ya karena hanya itulah bidang yang bisa jurusan saya lamar, yak, jadi di PLN kita akan langsung memilih bidang pekerjaan kita kelak, hal ini seperti Telkom, namun berbeda dengan BUMN lain seperti BI dan Pertamina dimana pada awal tahapan kita tidak memilih bidang tertentu namun akan dimasukan dalam satu program pelatihan. Setelah itu saya diminta untuk mengisi regional tempat saya melakukan seleksi, saya pun memilih Yogyakarta, karena saya bertempat tinggal di Karanganyar, dimana lebih dekat ke Yogya daripada ke Semarang :))). Oya nama rekrutmen saya adalah: REKRUTMEN PLN GROUP TINGKAT S1/D-IV D-III – YOGYAKARTA. Nah, regional ini akan berguna saat seleksi-seleksi selanjutnya dimana akan dilakukan di kota pilihan Anda, yeay!, lumayan lah ya hemat biaya transportasi yekan
     </string>
+
+
+    <!--  Login Toast text  -->
+    <string name="login_success">Login Sukses</string>
+    <string name="login_failed">Login Gagal</string>
+
 
 </resources>
