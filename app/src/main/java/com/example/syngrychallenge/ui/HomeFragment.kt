@@ -2,17 +2,17 @@ package com.example.syngrychallenge.ui
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.syngrychallenge.R
 import com.example.syngrychallenge.databinding.FragmentHomeBinding
 import com.example.syngrychallenge.domain.model.NoteModel
 import com.example.syngrychallenge.ui.adapter.HomeAdapter
 import com.example.syngrychallenge.ui.viewModel.HomeViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
     private val binding get() = _binding!!
@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
         val username = HomeFragmentArgs.fromBundle(arguments as Bundle).username
 
         binding.tvUsername.text = getString(R.string.tv_home_username, username)
-        viewModel.getAllNotes.observe(viewLifecycleOwner) { notes ->
+        viewModel.getAllNotes(username).observe(viewLifecycleOwner) { notes ->
             if (notes.isEmpty()) {
                 emptyList.visibility = View.VISIBLE
                 svRecyclerView.visibility = View.GONE
@@ -77,27 +77,30 @@ class HomeFragment : Fragment() {
 
         logout.setOnClickListener {
             // this is how to go back
-            findNavController().popBackStack()
+            val destination = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+            findNavController().navigate(destination)
         }
 
         fabCreateNote.setOnClickListener {
-            showDialog()
-        }
-    }
+            val fragmentManager = childFragmentManager
+            val dialog = CreateNoteDialog()
+            val bundle = Bundle()
 
-    private fun showDialog() {
-        val fragmentManager = childFragmentManager
-        val newFragment = CreateNoteDialog()
-        newFragment.show(fragmentManager, "dialog")
+            bundle.putString(ON_CREATE, username)
+            dialog.arguments = bundle
+            dialog.show(fragmentManager, "createNoteDialog")
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        requireArguments().remove("username")
     }
 
     companion object {
         const val ON_DELETE = "DELETE NOTE"
         const val ON_UPDATE = "UPDATE NOTE"
+        const val ON_CREATE = "CREATE NOTE"
     }
 }

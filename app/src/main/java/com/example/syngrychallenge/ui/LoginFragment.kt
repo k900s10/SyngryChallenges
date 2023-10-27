@@ -1,11 +1,15 @@
 package com.example.syngrychallenge.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.syngrychallenge.R
 import com.example.syngrychallenge.databinding.FragmentLoginBinding
@@ -42,12 +46,11 @@ class LoginFragment : Fragment() {
             viewModel.isAccountExist(inputEmail, inputPassword)
             viewModel.validation.observe(viewLifecycleOwner) { validation ->
                 if (validation.isNotEmpty()) {
-                    val destination = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-
-                    Toast.makeText(activity, getString(R.string.login_success), Toast.LENGTH_SHORT)
-                        .show()
-                    destination.username = validation
-                    findNavController().navigate(destination)
+                        val destination =
+                            LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                        destination.username = validation
+//                        findNavController().navigate(destination)
+                    findNavController().safeNavigate(destination)
                 } else
                     Toast.makeText(activity, getString(R.string.login_failed), Toast.LENGTH_LONG)
                         .show()
@@ -58,5 +61,12 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    //miracle
+    fun NavController.safeNavigate(direction: NavDirections) {
+        currentDestination?.getAction(direction.actionId)?.run {
+            navigate(direction)
+        }
     }
 }

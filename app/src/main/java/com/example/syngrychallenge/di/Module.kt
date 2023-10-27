@@ -3,8 +3,7 @@ package com.example.syngrychallenge.di
 import androidx.room.Room
 import com.example.syngrychallenge.data.Repository
 import com.example.syngrychallenge.data.local.LocalDataStore
-import com.example.syngrychallenge.data.local.room.NotesDatabase
-import com.example.syngrychallenge.data.local.room.UsersDatabase
+import com.example.syngrychallenge.data.local.room.AppDatabase
 import com.example.syngrychallenge.domain.repository.IRepository
 import com.example.syngrychallenge.domain.usecase.NoteInteractor
 import com.example.syngrychallenge.domain.usecase.NoteUseCase
@@ -20,29 +19,30 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val notesDatabaseModule = module {
-    factory { get<NotesDatabase>().dao() }
+val appDatabaseModule = module {
+    factory { get<AppDatabase>().notesDao() }
+    factory { get<AppDatabase>().usersDao() }
     single {
         Room.databaseBuilder(
             androidContext(),
-            NotesDatabase::class.java,
-            "Note.db"
+            AppDatabase::class.java,
+            "App.db"
         ).fallbackToDestructiveMigration()
             .build()
     }
 }
-
-val usersDatabaseModule = module {
-    factory { get<UsersDatabase>().dao() }
-    single {
-        Room.databaseBuilder(
-            androidContext(),
-            UsersDatabase::class.java,
-            "Users.db"
-        ).fallbackToDestructiveMigration()
-            .build()
-    }
-}
+//
+//val usersDatabaseModule = module {
+//    factory { get<UsersDatabase>().dao() }
+//    single {
+//        Room.databaseBuilder(
+//            androidContext(),
+//            UsersDatabase::class.java,
+//            "Users.db"
+//        ).fallbackToDestructiveMigration()
+//            .build()
+//    }
+//}
 
 val repositoryModule = module {
     single { LocalDataStore(get(), get()) }

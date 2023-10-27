@@ -14,6 +14,5 @@ interface UsersDao {
 
     @Query("SELECT * FROM users WHERE email = :email AND password = :password")
     suspend fun isAccountExist(email: String, password: String) :
-//            List<UsersEntity>
             UsersEntity
 }

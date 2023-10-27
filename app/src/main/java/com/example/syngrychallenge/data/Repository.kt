@@ -1,6 +1,7 @@
 package com.example.syngrychallenge.data
 
 import com.example.syngrychallenge.data.local.LocalDataStore
+import com.example.syngrychallenge.data.local.entity.UsersEntity
 import com.example.syngrychallenge.domain.model.NoteModel
 import com.example.syngrychallenge.domain.model.UsersModel
 import com.example.syngrychallenge.domain.repository.IRepository
@@ -14,9 +15,9 @@ import kotlinx.coroutines.launch
 
 class Repository(private val localDataStore: LocalDataStore) : IRepository {
 
-    override fun getAllNotes(): Flow<List<NoteModel>> =
-        localDataStore.getAllNote().map { entity ->
-            DataMapper.mapNotesEntityToDomain(entity)
+    override fun getAllNotes(username: String): Flow<List<NoteModel>> =
+        localDataStore.getAllNote(username).map { userNotes ->
+            DataMapper.mapNotesEntityToDomain(userNotes.notes)
         }
 
 
@@ -54,10 +55,10 @@ class Repository(private val localDataStore: LocalDataStore) : IRepository {
     override suspend fun isAccountExist(usersModel: UsersModel): String {
         val email = usersModel.email
         val password = usersModel.password
-        val account = CoroutineScope(Dispatchers.IO).async {
+        val account : UsersEntity? = CoroutineScope(Dispatchers.IO).async {
             localDataStore.isAccountExist(email, password)
         }.await()
 
-        return account.username
+        return account?.username ?: ""
     }
 }

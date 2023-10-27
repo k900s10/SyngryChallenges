@@ -1,11 +1,16 @@
 package com.example.syngrychallenge.ui
 
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.example.syngrychallenge.R
 import com.example.syngrychallenge.databinding.DialogCreateNoteBinding
+import com.example.syngrychallenge.domain.model.NoteModel
 import com.example.syngrychallenge.ui.viewModel.CreateNoteViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -29,15 +34,22 @@ class CreateNoteDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val btnSubmit = binding.btnCreateNote
+        val bundle = arguments
+        val username = bundle?.getString(HomeFragment.ON_CREATE)
 
         btnSubmit.setOnClickListener {
             val inputTitle = binding.etCreateNoteTitle.text.toString()
             val inputNote = binding.etCreateNoteNote.text.toString()
 
-            viewModel.createNote(inputTitle, inputNote)
-            runBlocking {
-                delay(100)
-                dialog?.dismiss()
+            if (username != null) {
+                viewModel.createNote(username = username, title = inputTitle, note = inputNote)
+                runBlocking {
+                    delay(100)
+                    dialog?.dismiss()
+                }
+            } else {
+                Toast.makeText(activity, getString(R.string.create_note_failed), Toast.LENGTH_LONG)
+                    .show()
             }
         }
     }

@@ -6,11 +6,12 @@ import com.example.syngrychallenge.domain.model.NoteModel
 import com.example.syngrychallenge.domain.usecase.NoteUseCase
 
 class EditNoteViewModel(private val noteUseCase: NoteUseCase): ViewModel() {
-    fun updateNote(noteId: Int, title: String, note: String) {
+    fun updateNote(username: String, noteId: Int, title: String, note: String) {
         val notesModel = NoteModel(
             id = noteId,
             title = title,
-            note = note
+            note = note,
+            fkUsername = username
         )
         noteUseCase.updateNote(notesModel)
     }

@@ -5,7 +5,7 @@ import com.example.syngrychallenge.domain.model.UsersModel
 import kotlinx.coroutines.flow.Flow
 
 interface IRepository {
-    fun getAllNotes(): Flow<List<NoteModel>>
+    fun getAllNotes(username: String): Flow<List<NoteModel>>
 
     fun createNote(noteModel: NoteModel)
 

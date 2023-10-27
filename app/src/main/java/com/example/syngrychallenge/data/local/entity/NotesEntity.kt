@@ -15,4 +15,7 @@ data class NotesEntity(
 
     @ColumnInfo(name = "note")
     val note: String,
+
+    @ColumnInfo(name = "FkUsername")
+    val fkUsername: String,
     )

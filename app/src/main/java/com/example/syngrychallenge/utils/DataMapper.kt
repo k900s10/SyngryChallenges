@@ -11,7 +11,8 @@ object DataMapper {
             NoteModel(
                 id = entity.id,
                 title = entity.title,
-                note = entity.note
+                note = entity.note,
+                fkUsername = entity.fkUsername
             )
         }
 
@@ -19,7 +20,8 @@ object DataMapper {
         NotesEntity(
             id = domain.id,
             title = domain.title,
-            note = domain.note
+            note = domain.note,
+            fkUsername = domain.fkUsername
         )
 
     fun mapUsersDomainToEntity(domain: UsersModel): UsersEntity =

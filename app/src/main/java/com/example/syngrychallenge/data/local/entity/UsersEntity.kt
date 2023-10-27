@@ -6,9 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "users")
 data class UsersEntity(
-    //TODO() change the PK from username to email.
-    //TODO() semua user masih dapat mengakses semua data
-
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "username")
     val username: String,

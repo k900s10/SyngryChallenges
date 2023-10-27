@@ -5,8 +5,8 @@ import com.example.syngrychallenge.domain.repository.IRepository
 import kotlinx.coroutines.flow.Flow
 
 class NoteInteractor(private val iRepository: IRepository): NoteUseCase {
-    override fun getAllNotes(): Flow<List<NoteModel>> =
-        iRepository.getAllNotes()
+    override fun getAllNotes(username: String): Flow<List<NoteModel>> =
+        iRepository.getAllNotes(username)
 
     override fun createNote(noteModel: NoteModel) =
         iRepository.createNote(noteModel)

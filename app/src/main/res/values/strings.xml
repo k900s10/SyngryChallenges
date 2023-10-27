@@ -6,7 +6,7 @@
     <string name="et_login_id_hint">Masukkan Email</string>
     <string name="et_login_password_hint">Masukkan Password</string>
     <string name="btn_login">Login</string>
-    <string name="tv_login_create_account">Belum punya akun?</string>
+    <string name="tv_login_create_account">Belum punya akun? <font fgcolor="blue">Daftar disini</font></string>
 
     <!--  Register  -->
     <string name="tv_register_title">Register</string>
@@ -42,9 +42,10 @@
     </string>
 
 
-    <!--  Login Toast text  -->
+    <!--  Toast text  -->
     <string name="login_success">Login Sukses</string>
     <string name="login_failed">Login Gagal</string>
+    <string name="create_note_failed">Uknown error. Please restart the app</string>
 
 
 </resources>

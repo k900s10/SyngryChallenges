@@ -5,10 +5,11 @@ import com.example.syngrychallenge.domain.model.NoteModel
 import com.example.syngrychallenge.domain.usecase.NoteUseCase
 
 class CreateNoteViewModel(private val noteUseCase: NoteUseCase): ViewModel() {
-    fun createNote(title: String, note: String) {
+    fun createNote(username: String, title: String, note: String) {
         val notesModel = NoteModel(
             title = title,
-            note = note
+            note = note,
+            fkUsername = username
         )
         noteUseCase.createNote(notesModel)
     }

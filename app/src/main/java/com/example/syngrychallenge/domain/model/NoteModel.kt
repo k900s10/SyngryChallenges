@@ -6,5 +6,6 @@ import kotlinx.parcelize.Parcelize
 data class NoteModel (
     val id: Int = 0,
     val title: String,
-    val note: String
+    val note: String,
+    val fkUsername: String
 ): Parcelable

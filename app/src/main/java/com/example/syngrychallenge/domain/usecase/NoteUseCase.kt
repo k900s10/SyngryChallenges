@@ -4,7 +4,7 @@ import com.example.syngrychallenge.domain.model.NoteModel
 import kotlinx.coroutines.flow.Flow
 
 interface NoteUseCase {
-    fun getAllNotes(): Flow<List<NoteModel>>
+    fun getAllNotes(username: String): Flow<List<NoteModel>>
 
     fun createNote(noteModel: NoteModel)
 
