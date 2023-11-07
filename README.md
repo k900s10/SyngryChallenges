@@ -10,7 +10,7 @@
 ![Home](outputs/index.png)
 
 ## Movie Detail
-![Movie Detail](outputs/movie%20detai.png)
+![Movie Detail](outputs/movieDetail.png)
 
 ## Profile
 ![Profile](outputs/profile.png)
