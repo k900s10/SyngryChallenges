@@ -1,16 +1,16 @@
 # SyngryChallenges
 
-##Login
+## Login
 ![Login](outputs/login.png)
 
-##Register
+## Register
 ![Register](outputs/register.png)
 
-##Home
+## Home
 ![Home](outputs/index.png)
 
-##Movie Detail
-![Movie Detail](outputs/movie_detail.png)
+## Movie Detail
+![Movie Detail](outputs/movie%20detai.png)
 
-##Profile
+## Profile
 ![Profile](outputs/profile.png)
