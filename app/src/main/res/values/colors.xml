@@ -9,5 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#c7c7c7</color>
     <color name="dark_grey">#a29d9d</color>
+    <color name="darker_grey">#6C6A6A</color>
+    <color name="super_dark_grey">#545454</color>
+    <color name="orange">#F1652D</color>
+    <color name="green">#48F042</color>
+    <color name="app_background">#121212</color>
+    <color name="text">#fefefe</color>
     <color name="anchor">#1d01f0</color>
 </resources>

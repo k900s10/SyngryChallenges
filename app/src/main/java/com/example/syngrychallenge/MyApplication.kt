@@ -1,9 +1,11 @@
 package com.example.syngrychallenge
 
 import android.app.Application
-import com.example.syngrychallenge.di.appDatabaseModule
+import com.example.syngrychallenge.di.localDataStoreModule
+import com.example.syngrychallenge.di.networkModule
+import com.example.syngrychallenge.di.remoteDataSourceModule
 import com.example.syngrychallenge.di.repositoryModule
-import com.example.syngrychallenge.di.noteUseCaseModule
+import com.example.syngrychallenge.di.userPreferenceModule
 import com.example.syngrychallenge.di.usersUseCaseModule
 import com.example.syngrychallenge.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -19,11 +21,12 @@ class MyApplication : Application() {
             androidContext(this@MyApplication)
             modules(
                 listOf(
-                    appDatabaseModule,
+                    networkModule,
+                    userPreferenceModule,
+                    localDataStoreModule,
+                    remoteDataSourceModule,
                     repositoryModule,
-                    noteUseCaseModule,
                     viewModelModule,
-//                    usersDatabaseModule,
                     usersUseCaseModule
                 )
             )

@@ -1,19 +1,27 @@
 package com.example.syngrychallenge.domain.repository
-
-import com.example.syngrychallenge.domain.model.NoteModel
-import com.example.syngrychallenge.domain.model.UsersModel
+import com.example.syngrychallenge.data.remote.response.ApiResponse
+import com.example.syngrychallenge.domain.model.CastsModel
+import com.example.syngrychallenge.domain.model.LoginModel
+import com.example.syngrychallenge.domain.model.NewMoviesModel
+import com.example.syngrychallenge.domain.model.RegisterModel
+import com.example.syngrychallenge.domain.model.ProfileModel
 import kotlinx.coroutines.flow.Flow
 
 interface IRepository {
-    fun getAllNotes(username: String): Flow<List<NoteModel>>
+    fun isLogin(): Boolean
 
-    fun createNote(noteModel: NoteModel)
+    fun getProfile(): Flow<ProfileModel>
 
-    fun updateNote(noteModel: NoteModel)
+    fun createAccount(registerModel: RegisterModel)
 
-    fun createAccount(usersModel: UsersModel)
+    fun createLoginSession()
 
-    suspend fun isAccountExist(usersModel: UsersModel): String
+    fun logout()
 
-    fun deleteNote(noteModel: NoteModel)
+    fun updateProfile(profileModel: ProfileModel)
+    fun auth(input: LoginModel): Boolean
+
+    fun getNewMovie(): Flow<ApiResponse<List<NewMoviesModel>>>
+    fun getPopularMovie(): Flow<ApiResponse<List<NewMoviesModel>>>
+    fun getMovieCasts(movieId: Int): Flow<ApiResponse<List<CastsModel>>>
 }

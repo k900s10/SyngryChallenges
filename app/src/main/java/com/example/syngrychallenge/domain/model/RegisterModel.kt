@@ -1,8 +1,7 @@
 package com.example.syngrychallenge.domain.model
 
-data class UsersModel(
-    val username: String,
+data class RegisterModel(
+    val username : String,
     val email: String,
     val password: String
-
 )

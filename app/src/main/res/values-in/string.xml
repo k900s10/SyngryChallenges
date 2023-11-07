@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SyngryChallenge</string>
+
+    <!--  Login  -->
+    <string name="tv_login_title">Masuk</string>
+    <string name="et_login_email_hint">Email</string>
+    <string name="et_login_password_hint">Kata Sandi</string>
+    <string name="btn_login">Masuk</string>
+    <string name="tv_login_create_account">Baru menggunakan Netflix? <font fgcolor="white">Daftar sekarang</font></string>
+    <string name="tv_login_need_help">Butuh bantuan?</string>
+
+    <!--  Profile  -->
+    <string name="tv_profile_label">Profil</string>
+    <string name="et_profile_username_hint">Username</string>
+    <string name="et_profile_name_hint">Nama</string>
+    <string name="et_profile_birth_hint">Tanggal Lahir</string>
+    <string name="et_profile_address_hint">Alamat</string>
+    <string name="sw_enable_edit_profile">Ubah</string>
+    <string name="btn_edit_profile">Ubah Profil</string>
+    <string name="btn_logout">Keluar</string>
+
+    <!--  Register  -->
+    <string name="tv_register_title">Buat akun baru</string>
+    <string name="et_register_username_hint">Username</string>
+    <string name="et_register_email_hint">Email</string>
+    <string name="et_register_password_hint">Kata sandi</string>
+    <string name="et_register_confirm_password_hint">Konfirmasi kata sandi</string>
+    <string name="btn_register">Buat akun</string>
+    <string name="tv_register_navigate_to_login"> Sudah punya akun? <font fgcolor="white">Masuk sekarang</font></string>
+
+    <!--  Detail  -->
+    <string name="btn_details_homepage">Homepage</string>
+    <string name="tv_prolog_label">Deskripsi</string>
+    <string name="tv_movie_score">%s Skor</string>
+    <string name="tv_movie_title">Finding Nemo</string>
+    <string name="tv_movie_release_date">2023</string>
+    <string name="tv_movie_duration">2h 2m</string>
+    <string name="tv_top_cast_label">Daftar Aktor</string>
+    <string name="tv_prolog_description">Nemo, an adventurous young clownfish, is unexpectedly taken from his Great Barrier Reef home to a dentist\'s office aquarium. It\'s up to his worrisome father Marlin and a friendly but forgetful fish Dory to bring Nemo home — meeting vegetarian sharks, surfer dude turtles, hypnotic jellyfish, hungry seagulls, and more along the way.</string>
+    <string name="tv_cast_original_name">Willem Dafoe</string>
+    <string name="tv_cast_character">Gill (voice)</string>
+
+    <!--  Home  -->
+    <string name="tv_home_username">Selamat Datang, %1$s</string>
+    <string name="tv_home_popular_label">Sedang trending</string>
+    <string name="tv_home_new_movie_label">Baru rilis</string>
+    <string name="tv_home_detail_label">Detil</string>
+    <string name="tv_home_see_all_label">Lihat semua</string>
+
+
+    <!--  Toast text  -->
+    <string name="login_success">Masuk sukses</string>
+    <string name="login_failed">Akun tidak ditemukan</string>
+
+
+    <!--  API  -->
+    <string name="sort_by_release_date_desc">primary_release_date.desc</string>
+    <string name="sort_by_popularity_desc">popularity.desc</string>
+    <string name="response_failed">Error. Mohon restart aplikasi</string>
+    <string name="response_empty">Tidak ada data…</string>
+    <string name="poster_url">https://image.tmdb.org/t/p/original/%1$s</string>
+    <string name="api_url">https://api.themoviedb.org/3/</string>
+    <string name="Failed_attemp">Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMTI5ZGRlMmVkNDc0MzI4YTJmYzVhM2QxNzNiZGQ2MiIsInN1YiI6IjY1NDFmYzRiMWFjMjkyMDBhYmQ2ZDE3YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bw3IcRKM_bj8kHz5qmPHSlqXGX8W03sO-FrJkSx0xQ4</string>
+    <string name="Accept">application/json</string>
+</resources>

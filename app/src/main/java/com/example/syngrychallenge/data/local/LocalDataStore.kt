@@ -1,29 +1,24 @@
 package com.example.syngrychallenge.data.local
 
-import com.example.syngrychallenge.data.local.dao.NotesDao
-import com.example.syngrychallenge.data.local.dao.UsersDao
-import com.example.syngrychallenge.data.local.entity.NotesEntity
-import com.example.syngrychallenge.data.local.entity.UserNotesEntity
-import com.example.syngrychallenge.data.local.entity.UsersEntity
+import com.example.syngrychallenge.data.local.pref.UserPreference
+import com.example.syngrychallenge.domain.model.LoginModel
+import com.example.syngrychallenge.domain.model.RegisterModel
+import com.example.syngrychallenge.domain.model.ProfileModel
 import kotlinx.coroutines.flow.Flow
 
-class LocalDataStore(private val notes: NotesDao, private val users: UsersDao) {
-    fun getAllNote(username: String): Flow<UserNotesEntity> =
-        notes.getAllNote(username)
+class LocalDataStore(private val userPreference: UserPreference) {
+    fun isLogin() : Boolean = userPreference.isLogin
 
-    suspend fun createNote(notesEntity: NotesEntity) =
-        notes.createNote(notesEntity)
+    fun getProfile() : Flow<ProfileModel> = userPreference.getProfile()
 
-    fun updateNote(notesEntity: NotesEntity) =
-        notes.updateNote(notesEntity)
+    fun auth(): LoginModel = userPreference.auth()
 
-    suspend fun createAccount(usersEntity: UsersEntity) =
-        users.createAccount(usersEntity)
+    fun createAccount(registerModel: RegisterModel) = userPreference.createAccount(registerModel)
+    fun createLoginSession() =
+        userPreference.createLoginSession()
 
-    suspend fun isAccountExist(email: String, password: String): UsersEntity =
-        users.isAccountExist(email, password)
+    fun logout() =
+        userPreference.logout()
 
-    suspend fun deleteNote(notesEntity: NotesEntity) =
-        notes.deleteNote(notesEntity)
-
+    fun updateProfile(profileModel: ProfileModel) = userPreference.updateProfile(profileModel)
 }

@@ -1,41 +1,35 @@
 package com.example.syngrychallenge.utils
 
-import com.example.syngrychallenge.data.local.entity.NotesEntity
-import com.example.syngrychallenge.data.local.entity.UsersEntity
-import com.example.syngrychallenge.domain.model.NoteModel
-import com.example.syngrychallenge.domain.model.UsersModel
+import com.example.syngrychallenge.data.remote.response.CastItem
+import com.example.syngrychallenge.data.remote.response.ResultsItem
+import com.example.syngrychallenge.domain.model.CastsModel
+import com.example.syngrychallenge.domain.model.NewMoviesModel
+
 
 object DataMapper {
-    fun mapNotesEntityToDomain(data: List<NotesEntity>): List<NoteModel> =
-        data.map { entity ->
-            NoteModel(
-                id = entity.id,
-                title = entity.title,
-                note = entity.note,
-                fkUsername = entity.fkUsername
+    fun mapNewMovieResponseToDomain(data: List<ResultsItem>): List<NewMoviesModel> =
+        data.map { response ->
+            NewMoviesModel(
+                overview = response.overview,
+                title = response.title,
+                posterPath = response.posterPath,
+                backdropPath = response.backdropPath,
+                releaseDate = response.releaseDate,
+                popularity = response.popularity,
+                voteAverage = response.voteAverage,
+                id = response.id
             )
         }
 
-    fun mapNotesDomainToEntity(domain: NoteModel): NotesEntity =
-        NotesEntity(
-            id = domain.id,
-            title = domain.title,
-            note = domain.note,
-            fkUsername = domain.fkUsername
-        )
-
-    fun mapUsersDomainToEntity(domain: UsersModel): UsersEntity =
-        UsersEntity(
-            username = domain.username,
-            email = domain.email,
-            password = domain.password
-        )
-
-    fun mapUsersEntityToDomain(domain: UsersEntity): UsersModel =
-        UsersModel(
-            username = domain.username,
-            email = domain.email,
-            password = domain.password
-        )
+    fun mapMovieCreditsToDomain(data: List<CastItem>): List<CastsModel> =
+        data.map { response ->
+            CastsModel(
+                character = response.character,
+                originalName = response.originalName,
+                profilePath = response.profilePath,
+                id = response.id,
+                order = response.order
+            )
+        }
 
 }

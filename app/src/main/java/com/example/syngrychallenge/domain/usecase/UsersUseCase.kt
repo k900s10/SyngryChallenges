@@ -1,10 +1,30 @@
 package com.example.syngrychallenge.domain.usecase
 
-import com.example.syngrychallenge.domain.model.UsersModel
+import com.example.syngrychallenge.data.remote.response.ApiResponse
+import com.example.syngrychallenge.domain.model.CastsModel
+import com.example.syngrychallenge.domain.model.LoginModel
+import com.example.syngrychallenge.domain.model.NewMoviesModel
+import com.example.syngrychallenge.domain.model.RegisterModel
+import com.example.syngrychallenge.domain.model.ProfileModel
+import kotlinx.coroutines.flow.Flow
 
 interface UsersUseCase {
-    fun createAccount(usersModel: UsersModel)
+    fun isLogin(): Boolean
 
-    suspend fun isAccountExist(usersModel: UsersModel): String
+    fun getProfile(): Flow<ProfileModel>
 
+    fun auth(input: LoginModel): Boolean
+
+    fun createAccount(registerModel: RegisterModel)
+    fun createLoginSession()
+
+    fun logout()
+
+    fun updateProfile(profileModel: ProfileModel)
+
+    fun getNewMovie(): Flow<ApiResponse<List<NewMoviesModel>>>
+
+    fun getPopularMovie(): Flow<ApiResponse<List<NewMoviesModel>>>
+
+    fun getMovieCasts(movieId: Int): Flow<ApiResponse<List<CastsModel>>>
 }

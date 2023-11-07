@@ -3,70 +3,62 @@ package com.example.syngrychallenge.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.syngrychallenge.R
-import com.example.syngrychallenge.databinding.ItemNoteBinding
-import com.example.syngrychallenge.domain.model.NoteModel
+import com.example.syngrychallenge.databinding.ItemMovieBinding
+import com.example.syngrychallenge.domain.model.NewMoviesModel
 
 class HomeAdapter :
-    ListAdapter<NoteModel, HomeAdapter.MyViewHolder>(DIFF_CALLBACK) {
+    ListAdapter<NewMoviesModel, HomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
 
-    private lateinit var onUpdatelickCallback: OnUpdatelickCallback
-    private lateinit var onDeleteClickCallback: OnDeletelickCallback
+    private lateinit var setOnClickCallback: OnClickCallback
 
-    fun setOnUpdateClickCallback(onUpdatelickCallback: OnUpdatelickCallback) {
-        this.onUpdatelickCallback = onUpdatelickCallback
+    fun setOnClickCallback(onUpdatelickCallback: OnClickCallback) {
+        this.setOnClickCallback = onUpdatelickCallback
     }
 
-    fun setOnDeleteClickCallback(onDeletelickCallback: OnDeletelickCallback) {
-        this.onDeleteClickCallback = onDeletelickCallback
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val binding =
-            ItemNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+            ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return HomeViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val note = getItem(position)
-        if (note != null) {
-            holder.bind(note)
-            holder.itemView.findViewById<ImageButton>(R.id.ib_edit).setOnClickListener {
-                onUpdatelickCallback.onItemClicked(note, holder.itemView.context)
-            }
-            holder.itemView.findViewById<ImageButton>(R.id.ib_delete).setOnClickListener {
-                onDeleteClickCallback.onItemClicked(note, holder.itemView.context)
+    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+        val movies = getItem(position)
+        if (movies != null) {
+            holder.bind(movies, holder.itemView.context)
+            holder.itemView.findViewById<ImageView>(R.id.siv_movie_poster).setOnClickListener {
+                setOnClickCallback.onItemClicked(movies, holder.itemView.context)
             }
         }
     }
 
-    interface OnUpdatelickCallback {
-        fun onItemClicked(note: NoteModel, context: Context)
-    }
-
-    interface OnDeletelickCallback {
-        fun onItemClicked(note: NoteModel, context: Context)
+    interface OnClickCallback {
+        fun onItemClicked(note: NewMoviesModel, context: Context)
     }
 
 
-    class MyViewHolder(private val binding: ItemNoteBinding) :
+    class HomeViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(note: NoteModel) {
-            binding.notes = note
+        fun bind(data: NewMoviesModel, context: Context) {
+            Glide
+                .with(context)
+                .load(context.getString(R.string.poster_url, data.posterPath))
+                .into(binding.sivMoviePoster)
         }
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NoteModel>() {
-            override fun areItemsTheSame(oldItem: NoteModel, newItem: NoteModel): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NewMoviesModel>() {
+            override fun areItemsTheSame(oldItem: NewMoviesModel, newItem: NewMoviesModel): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: NoteModel, newItem: NoteModel): Boolean {
+            override fun areContentsTheSame(oldItem: NewMoviesModel, newItem: NewMoviesModel): Boolean {
                 return oldItem.id == newItem.id
             }
         }

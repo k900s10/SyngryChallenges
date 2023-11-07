@@ -5,13 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.syngrychallenge.R
+import com.example.syngrychallenge.data.remote.response.ApiResponse
 import com.example.syngrychallenge.databinding.FragmentHomeBinding
-import com.example.syngrychallenge.domain.model.NoteModel
+import com.example.syngrychallenge.domain.model.NewMoviesModel
 import com.example.syngrychallenge.ui.adapter.HomeAdapter
 import com.example.syngrychallenge.ui.viewModel.HomeViewModel
+import com.example.syngrychallenge.utils.Util.safeNavigate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -30,77 +34,94 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val logout = binding.tvLogout
-        val _adapter = HomeAdapter()
-        val emptyList = binding.tvEmptyRecyclerView
-        val svRecyclerView = binding.svRecyclerView
-        val fabCreateNote = binding.fabAddNote
-        val username = HomeFragmentArgs.fromBundle(arguments as Bundle).username
-
-        binding.tvUsername.text = getString(R.string.tv_home_username, username)
-        viewModel.getAllNotes(username).observe(viewLifecycleOwner) { notes ->
-            if (notes.isEmpty()) {
-                emptyList.visibility = View.VISIBLE
-                svRecyclerView.visibility = View.GONE
-            } else {
-                _adapter.submitList(notes)
-                emptyList.visibility = View.GONE
-                svRecyclerView.visibility = View.VISIBLE
-            }
-        }
-        binding.recyclerView.apply {
-            adapter = _adapter
-        }
-
-        _adapter.setOnDeleteClickCallback(object : HomeAdapter.OnDeletelickCallback {
-            override fun onItemClicked(note: NoteModel, context: Context) {
-                val fragmentManager = childFragmentManager
-                val dialog = DeleteNoteDialog()
-                val bundle = Bundle()
-
-                bundle.putParcelable(ON_DELETE, note)
-                dialog.arguments = bundle
-                dialog.show(fragmentManager, "deleteNoteDialog")
-            }
-        })
-        _adapter.setOnUpdateClickCallback(object : HomeAdapter.OnUpdatelickCallback {
-            override fun onItemClicked(note: NoteModel, context: Context) {
-                val fragmentManager = childFragmentManager
-                val dialog = EditNoteDialog()
-                val bundle = Bundle()
-
-                bundle.putParcelable(ON_UPDATE, note)
-                dialog.arguments = bundle
-                dialog.show(fragmentManager, "editNoteDialog")
-            }
-        })
-
-        logout.setOnClickListener {
-            // this is how to go back
-            val destination = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+        val newMoviesAdapter = HomeAdapter()
+        val popularMoviesAdapter = HomeAdapter()
+        val rvNewMovie = binding.rvNewMovie
+        val rvTrendingMovie = binding.rvTrendingMovie
+        val btnProfile = binding.ivProfile
+//        val username = HomeFragmentArgs.fromBundle(arguments as Bundle).username
+//
+//        binding.tvUsername.text = getString(R.string.tv_home_username, username)
+        btnProfile.setOnClickListener {
+            val destination = HomeFragmentDirections.actionHomeFragmentToProfileFragment()
             findNavController().navigate(destination)
         }
 
-        fabCreateNote.setOnClickListener {
-            val fragmentManager = childFragmentManager
-            val dialog = CreateNoteDialog()
-            val bundle = Bundle()
+        viewModel.popularMovies.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is ApiResponse.Success -> {
+                    val movies = result.data
+                    bindPoster(movies[0])
+                    popularMoviesAdapter.submitList(movies)
+                }
 
-            bundle.putString(ON_CREATE, username)
-            dialog.arguments = bundle
-            dialog.show(fragmentManager, "createNoteDialog")
+                is ApiResponse.Error ->
+                    Toast.makeText(activity, getString(R.string.response_failed), Toast.LENGTH_LONG)
+                        .show()
+
+                is ApiResponse.Empty ->
+                    Toast.makeText(activity, getString(R.string.response_empty), Toast.LENGTH_LONG)
+                        .show()
+            }
         }
+
+        viewModel.newMovies.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is ApiResponse.Success -> {
+                    newMoviesAdapter.submitList(result.data)
+                }
+
+                is ApiResponse.Error -> {
+                    Toast.makeText(activity, getString(R.string.response_failed), Toast.LENGTH_LONG)
+                        .show()
+                }
+
+                is ApiResponse.Empty -> {
+                    Toast.makeText(activity, getString(R.string.response_empty), Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+        }
+        binding.rvNewMovie.adapter = newMoviesAdapter
+        binding.rvTrendingMovie.adapter = popularMoviesAdapter
+
+        popularMoviesAdapter.onClickPoster()
+        newMoviesAdapter.onClickPoster()
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        requireArguments().remove("username")
+//        requireArguments().remove("username")
+    }
+
+    private fun bindPoster(movie: NewMoviesModel) {
+        Glide
+            .with(requireActivity())
+            .load(getString(R.string.poster_url, movie.posterPath))
+            .into(binding.ivPromotionMoviePoster)
+
+        binding.btnMovieShowcaseDetails.setOnClickListener {
+            val destination =
+                HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movie)
+            findNavController().safeNavigate(destination)
+        }
+    }
+
+    private fun HomeAdapter.onClickPoster() {
+        this.setOnClickCallback(
+            object : HomeAdapter.OnClickCallback {
+                override fun onItemClicked(movie: NewMoviesModel, context: Context) {
+                    val destination =
+                        HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movie)
+                    findNavController().safeNavigate(destination)
+                }
+            })
+
     }
 
     companion object {
-        const val ON_DELETE = "DELETE NOTE"
-        const val ON_UPDATE = "UPDATE NOTE"
-        const val ON_CREATE = "CREATE NOTE"
+        const val MOVIE_DETAIL = "movie detail"
     }
 }

@@ -1,64 +1,45 @@
 package com.example.syngrychallenge.data
 
 import com.example.syngrychallenge.data.local.LocalDataStore
-import com.example.syngrychallenge.data.local.entity.UsersEntity
-import com.example.syngrychallenge.domain.model.NoteModel
-import com.example.syngrychallenge.domain.model.UsersModel
+import com.example.syngrychallenge.data.remote.RemoteDataStore
+import com.example.syngrychallenge.data.remote.response.ApiResponse
+import com.example.syngrychallenge.domain.model.CastsModel
+import com.example.syngrychallenge.domain.model.LoginModel
+import com.example.syngrychallenge.domain.model.NewMoviesModel
+import com.example.syngrychallenge.domain.model.ProfileModel
+import com.example.syngrychallenge.domain.model.RegisterModel
 import com.example.syngrychallenge.domain.repository.IRepository
-import com.example.syngrychallenge.utils.DataMapper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 
-class Repository(private val localDataStore: LocalDataStore) : IRepository {
+class Repository(
+    private val localDataStore: LocalDataStore,
+    private val remoteDataStore: RemoteDataStore
+) : IRepository {
 
-    override fun getAllNotes(username: String): Flow<List<NoteModel>> =
-        localDataStore.getAllNote(username).map { userNotes ->
-            DataMapper.mapNotesEntityToDomain(userNotes.notes)
-        }
+    override fun isLogin(): Boolean =
+        localDataStore.isLogin()
 
+    override fun getProfile(): Flow<ProfileModel> = localDataStore.getProfile()
 
-    override fun createNote(noteModel: NoteModel) {
-        val entity = DataMapper.mapNotesDomainToEntity(noteModel)
+    override fun auth(input: LoginModel): Boolean {
+        val auth = localDataStore.auth()
 
-        CoroutineScope(Dispatchers.IO).launch {
-            localDataStore.createNote(entity)
-        }
+        return input.email == auth.email && input.password == auth.password
     }
 
-    override fun updateNote(noteModel: NoteModel) {
-        val entity = DataMapper.mapNotesDomainToEntity(noteModel)
+    override fun createAccount(registerModel: RegisterModel) =
+        localDataStore.createAccount(registerModel)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            localDataStore.updateNote(entity)
-        }
-    }
+    override fun createLoginSession() = localDataStore.createLoginSession()
 
-    override fun deleteNote(noteModel: NoteModel) {
-        val data = DataMapper.mapNotesDomainToEntity(noteModel)
+    override fun logout() = localDataStore.logout()
 
-        CoroutineScope(Dispatchers.IO).launch {
-            localDataStore.deleteNote(data)
-        }
-    }
+    override fun updateProfile(profileModel: ProfileModel) =
+        localDataStore.updateProfile(profileModel)
 
-    override fun createAccount(usersModel: UsersModel) {
-        val data = DataMapper.mapUsersDomainToEntity(usersModel)
-        CoroutineScope(Dispatchers.IO).launch {
-            localDataStore.createAccount(data)
-        }
-    }
+    override fun getNewMovie(): Flow<ApiResponse<List<NewMoviesModel>>> = remoteDataStore.getNewMovies()
 
-    override suspend fun isAccountExist(usersModel: UsersModel): String {
-        val email = usersModel.email
-        val password = usersModel.password
-        val account : UsersEntity? = CoroutineScope(Dispatchers.IO).async {
-            localDataStore.isAccountExist(email, password)
-        }.await()
+    override fun getPopularMovie(): Flow<ApiResponse<List<NewMoviesModel>>> = remoteDataStore.getPopularMovies()
 
-        return account?.username ?: ""
-    }
+    override fun getMovieCasts(movieId: Int) : Flow<ApiResponse<List<CastsModel>>> = remoteDataStore.getMovieCredits(movieId)
 }

@@ -2,50 +2,64 @@
     <string name="app_name">SyngryChallenge</string>
 
     <!--  Login  -->
-    <string name="tv_login_title">Login</string>
-    <string name="et_login_id_hint">Masukkan Email</string>
-    <string name="et_login_password_hint">Masukkan Password</string>
-    <string name="btn_login">Login</string>
-    <string name="tv_login_create_account">Belum punya akun? <font fgcolor="blue">Daftar disini</font></string>
+    <string name="tv_login_title">Sign In</string>
+    <string name="et_login_email_hint">Email</string>
+    <string name="et_login_password_hint">Password</string>
+    <string name="btn_login">Sign In</string>
+    <string name="tv_login_create_account">New to Netflix? <font fgcolor="white">Sign up now</font></string>
+    <string name="tv_login_need_help">Need help?</string>
+
+    <!--  Profile  -->
+    <string name="tv_profile_label">Profile</string>
+    <string name="et_profile_username_hint">Username</string>
+    <string name="et_profile_name_hint">Full name</string>
+    <string name="et_profile_birth_hint">Birth Date</string>
+    <string name="et_profile_address_hint">Address</string>
+    <string name="sw_enable_edit_profile">Edit</string>
+    <string name="btn_edit_profile">Update Profile</string>
+    <string name="btn_logout">Logout</string>
 
     <!--  Register  -->
-    <string name="tv_register_title">Register</string>
-    <string name="et_register_username_hint">Masukkan Username</string>
-    <string name="et_register_email_hint">Masukkan Email</string>
-    <string name="et_register_password_hint">Masukkan Password</string>
-    <string name="et_register_confirm_password_hint">Masukkan Konfirmasi Password</string>
-    <string name="btn_register">Daftar</string>
-    <string name="tv_register_navigate_to_login"> Sudah punya akun? <font fgcolor="blue">Masuk disini</font></string>
+    <string name="tv_register_title">Create An Account</string>
+    <string name="et_register_username_hint">Username</string>
+    <string name="et_register_email_hint">Email</string>
+    <string name="et_register_password_hint">Password</string>
+    <string name="et_register_confirm_password_hint">Confirm Password</string>
+    <string name="btn_register">Create an account</string>
+    <string name="tv_register_navigate_to_login"> Already have an account? <font fgcolor="white">Login now</font></string>
+
+    <!--  Detail  -->
+    <string name="btn_details_homepage">Homepage</string>
+    <string name="tv_prolog_label">Prolog</string>
+    <string name="tv_movie_score">%s Score</string>
+    <string name="tv_movie_title">Finding Nemo</string>
+    <string name="tv_movie_release_date">2023</string>
+    <string name="tv_movie_duration">2h 2m</string>
+    <string name="tv_top_cast_label">Top Cast</string>
+    <string name="tv_prolog_description">Nemo, an adventurous young clownfish, is unexpectedly taken from his Great Barrier Reef home to a dentist\'s office aquarium. It\'s up to his worrisome father Marlin and a friendly but forgetful fish Dory to bring Nemo home — meeting vegetarian sharks, surfer dude turtles, hypnotic jellyfish, hungry seagulls, and more along the way.</string>
+    <string name="tv_cast_original_name">Willem Dafoe</string>
+    <string name="tv_cast_character">Gill (voice)</string>
 
     <!--  Home  -->
-    <string name="tv_Home_title">Home</string>
     <string name="tv_home_username">Welcome, %1$s</string>
-    <string name="tv_home_logout">Logout</string>
-    <string name="tv_home_empty_list">Note is empty</string>
-    <!--  Home  delete data-->
-    <string name="tv_home_delete_data_label">Hapus Data</string>
-    <string name="btn_home_delete_data_true">HAPUS</string>
-    <string name="btn_home_delete_data_false">CANCEL</string>
-    <!--  Home  add data-->
-    <string name="tv_home_input_data_label">Input Data</string>
-    <string name="et_home_input_data_title_hint">Masukkan Judul</string>
-    <string name="et_home_input_data_note_hint">Masukkan Catatan</string>
-    <string name="btn_home_input_data">INPUT</string>
-    <!--  Home  edit data-->
-    <string name="tv_home_edit_data_label">Edit Data</string>
-    <string name="et_home_edit_data_title_hint">Masukkan Judul</string>
-    <string name="et_home_edit_data_note_hint">Masukkan Catatan</string>
-    <string name="btn_home_edit_data">UPDATE</string>
-    <!--  Home  note-->
-    <string name="tv_home_note_label">Tes Pengetahuan Bidang</string>
-    <string name="tv_home_note_value">Jadi, awalnya saya cuma iseng mendaftar PLN karena memang saat itu belum ada niat untuk berkarir di perusahaan sejenis ini, karena ya saat itu masih banyak perusahaan plat merah lain yang saya inginkan. Tapi, karena saat itu teman-teman saya banyak yang mengajak saya, ya akhirnya saya daftar melalui website PLN. Saat itu saya memilih bagian manajemen SDM dan organisasi, ya karena hanya itulah bidang yang bisa jurusan saya lamar, yak, jadi di PLN kita akan langsung memilih bidang pekerjaan kita kelak, hal ini seperti Telkom, namun berbeda dengan BUMN lain seperti BI dan Pertamina dimana pada awal tahapan kita tidak memilih bidang tertentu namun akan dimasukan dalam satu program pelatihan. Setelah itu saya diminta untuk mengisi regional tempat saya melakukan seleksi, saya pun memilih Yogyakarta, karena saya bertempat tinggal di Karanganyar, dimana lebih dekat ke Yogya daripada ke Semarang :))). Oya nama rekrutmen saya adalah: REKRUTMEN PLN GROUP TINGKAT S1/D-IV D-III – YOGYAKARTA. Nah, regional ini akan berguna saat seleksi-seleksi selanjutnya dimana akan dilakukan di kota pilihan Anda, yeay!, lumayan lah ya hemat biaya transportasi yekan
-    </string>
+    <string name="tv_home_popular_label">Trending Now</string>
+    <string name="tv_home_new_movie_label">Just Release</string>
+    <string name="tv_home_detail_label">Details</string>
+    <string name="tv_home_see_all_label">See all</string>
 
 
     <!--  Toast text  -->
-    <string name="login_success">Login Sukses</string>
-    <string name="login_failed">Login Gagal</string>
-    <string name="create_note_failed">Uknown error. Please restart the app</string>
+    <string name="login_success">Login Success</string>
+    <string name="login_failed">Account is not found</string>
 
 
+    <!--  API  -->
+    <string name="sort_by_release_date_desc">primary_release_date.desc</string>
+    <string name="sort_by_popularity_desc">popularity.desc</string>
+    <string name="response_failed">Uknown error. Please restart the app</string>
+    <string name="response_empty">Empty data…</string>
+    <string name="poster_url">https://image.tmdb.org/t/p/original/%1$s</string>
+    <string name="api_url">https://api.themoviedb.org/3/</string>
+    <string name="Failed_attemp">Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMTI5ZGRlMmVkNDc0MzI4YTJmYzVhM2QxNzNiZGQ2MiIsInN1YiI6IjY1NDFmYzRiMWFjMjkyMDBhYmQ2ZDE3YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bw3IcRKM_bj8kHz5qmPHSlqXGX8W03sO-FrJkSx0xQ4</string>
+    <string name="Accept">application/json</string>
 </resources>
