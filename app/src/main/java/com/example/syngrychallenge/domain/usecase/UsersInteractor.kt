@@ -10,19 +10,19 @@ import com.example.syngrychallenge.domain.repository.IRepository
 import kotlinx.coroutines.flow.Flow
 
 class UsersInteractor(private val iRepository: IRepository): UsersUseCase {
-    override fun isLogin(): Boolean = iRepository.isLogin()
+    override fun isLogin(): Flow<Boolean> = iRepository.isLogin()
 
     override fun getProfile(): Flow<ProfileModel> = iRepository.getProfile()
 
-    override fun auth(input: LoginModel): Boolean = iRepository.auth(input)
+    override suspend fun auth(input: LoginModel): Boolean = iRepository.auth(input)
 
-    override fun createAccount(registerModel: RegisterModel) = iRepository.createAccount(registerModel)
+    override suspend fun createAccount(registerModel: RegisterModel) = iRepository.createAccount(registerModel)
 
-    override fun createLoginSession() = iRepository.createLoginSession()
+    override suspend fun createLoginSession() = iRepository.createLoginSession()
 
-    override fun logout() = iRepository.logout()
+    override suspend fun logout() = iRepository.logout()
 
-    override fun updateProfile(profileModel: ProfileModel) = iRepository.updateProfile(profileModel)
+    override suspend fun updateProfile(profileModel: ProfileModel) = iRepository.updateProfile(profileModel)
 
     override fun getNewMovie(): Flow<ApiResponse<List<NewMoviesModel>>> = iRepository.getNewMovie()
 

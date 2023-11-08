@@ -2,13 +2,11 @@ package com.example.syngrychallenge.data.local.pref
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import com.example.syngrychallenge.domain.model.LoginModel
 import com.example.syngrychallenge.domain.model.ProfileModel
 import com.example.syngrychallenge.domain.model.RegisterModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-
 
 class UserPreference(context: Context) {
 
@@ -67,14 +65,14 @@ class UserPreference(context: Context) {
     }
 
 
-    companion object {
-        private const val USERNAME_KEY = "username"
-        private const val EMAIL_KEY = "email"
-        private const val PASSWORD_KEY = "password"
-        private const val NAME_KEY = "name"
-        private const val BIRTHDAY_KEY = "birthday"
-        private const val ADDRESS_KEY = "address"
-        private const val IS_LOGIN_KEY = "isLogin"
-    }
+companion object {
+    private const val USERNAME_KEY = "username"
+    private const val EMAIL_KEY = "email"
+    private const val PASSWORD_KEY = "password"
+    private const val NAME_KEY = "name"
+    private const val BIRTHDAY_KEY = "birthday"
+    private const val ADDRESS_KEY = "address"
+    private const val IS_LOGIN_KEY = "isLogin"
 
+}
 }

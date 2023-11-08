@@ -120,8 +120,4 @@ class HomeFragment : Fragment() {
             })
 
     }
-
-    companion object {
-        const val MOVIE_DETAIL = "movie detail"
-    }
 }

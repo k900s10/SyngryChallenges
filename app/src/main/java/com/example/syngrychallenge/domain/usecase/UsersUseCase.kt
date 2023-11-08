@@ -9,18 +9,18 @@ import com.example.syngrychallenge.domain.model.ProfileModel
 import kotlinx.coroutines.flow.Flow
 
 interface UsersUseCase {
-    fun isLogin(): Boolean
+    fun isLogin(): Flow<Boolean>
 
     fun getProfile(): Flow<ProfileModel>
 
-    fun auth(input: LoginModel): Boolean
+    suspend fun auth(input: LoginModel): Boolean
 
-    fun createAccount(registerModel: RegisterModel)
-    fun createLoginSession()
+    suspend fun createAccount(registerModel: RegisterModel)
+    suspend fun createLoginSession()
 
-    fun logout()
+    suspend fun logout()
 
-    fun updateProfile(profileModel: ProfileModel)
+    suspend fun updateProfile(profileModel: ProfileModel)
 
     fun getNewMovie(): Flow<ApiResponse<List<NewMoviesModel>>>
 

@@ -16,30 +16,34 @@ class Repository(
     private val remoteDataStore: RemoteDataStore
 ) : IRepository {
 
-    override fun isLogin(): Boolean =
+    override fun isLogin(): Flow<Boolean> =
         localDataStore.isLogin()
 
     override fun getProfile(): Flow<ProfileModel> = localDataStore.getProfile()
 
-    override fun auth(input: LoginModel): Boolean {
-        val auth = localDataStore.auth()
+    override suspend fun auth(input: LoginModel): Boolean {
+        val preference = localDataStore.auth()
 
-        return input.email == auth.email && input.password == auth.password
+        return input.email == preference.email && input.password == preference.password
+
     }
 
-    override fun createAccount(registerModel: RegisterModel) =
+    override suspend fun createAccount(registerModel: RegisterModel) =
         localDataStore.createAccount(registerModel)
 
-    override fun createLoginSession() = localDataStore.createLoginSession()
+    override suspend fun createLoginSession() = localDataStore.createLoginSession()
 
-    override fun logout() = localDataStore.logout()
+    override suspend fun logout() = localDataStore.logout()
 
-    override fun updateProfile(profileModel: ProfileModel) =
+    override suspend fun updateProfile(profileModel: ProfileModel) =
         localDataStore.updateProfile(profileModel)
 
-    override fun getNewMovie(): Flow<ApiResponse<List<NewMoviesModel>>> = remoteDataStore.getNewMovies()
+    override fun getNewMovie(): Flow<ApiResponse<List<NewMoviesModel>>> =
+        remoteDataStore.getNewMovies()
 
-    override fun getPopularMovie(): Flow<ApiResponse<List<NewMoviesModel>>> = remoteDataStore.getPopularMovies()
+    override fun getPopularMovie(): Flow<ApiResponse<List<NewMoviesModel>>> =
+        remoteDataStore.getPopularMovies()
 
-    override fun getMovieCasts(movieId: Int) : Flow<ApiResponse<List<CastsModel>>> = remoteDataStore.getMovieCredits(movieId)
+    override fun getMovieCasts(movieId: Int): Flow<ApiResponse<List<CastsModel>>> =
+        remoteDataStore.getMovieCredits(movieId)
 }
