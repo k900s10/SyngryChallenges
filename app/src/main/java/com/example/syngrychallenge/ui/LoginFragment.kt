@@ -1,6 +1,7 @@
 package com.example.syngrychallenge.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,10 +31,14 @@ class LoginFragment : Fragment() {
 
         val register = binding.tvCreateAccount
         val btnLogin = binding.btnLogin
-        if (viewModel.isLogin) {
-            val destination =
-                LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-            findNavController().safeNavigate(destination)
+
+        viewModel.isLogin.observe(viewLifecycleOwner) {isLogin ->
+            Log.d("fragment", isLogin.toString()) //magic. its working when i add it. im tired.
+            if (isLogin) {
+                val destination =
+                    LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                findNavController().safeNavigate(destination)
+            }
         }
 
         register.setOnClickListener {
@@ -72,11 +77,4 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    //miracle
-//    fun NavController.safeNavigate(direction: NavDirections) {
-//        currentDestination?.getAction(direction.actionId)?.run {
-//            navigate(direction)
-//        }
-//    }
 }
