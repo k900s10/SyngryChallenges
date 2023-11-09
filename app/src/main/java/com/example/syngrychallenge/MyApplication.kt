@@ -6,7 +6,6 @@ import com.example.syngrychallenge.di.networkModule
 import com.example.syngrychallenge.di.remoteDataSourceModule
 import com.example.syngrychallenge.di.repositoryModule
 import com.example.syngrychallenge.di.userDataStoreModule
-//import com.example.syngrychallenge.di.userPreferenceModule
 import com.example.syngrychallenge.di.usersUseCaseModule
 import com.example.syngrychallenge.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -24,7 +23,6 @@ class MyApplication : Application() {
                 listOf(
                     networkModule,
                     userDataStoreModule,
-//                    userPreferenceModule,
                     localDataStoreModule,
                     remoteDataSourceModule,
                     repositoryModule,

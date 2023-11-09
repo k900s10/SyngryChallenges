@@ -4,7 +4,6 @@ import com.example.syngrychallenge.R
 import com.example.syngrychallenge.data.Repository
 import com.example.syngrychallenge.data.local.LocalDataStore
 import com.example.syngrychallenge.data.local.pref.UserDataStore
-import com.example.syngrychallenge.data.local.pref.UserPreference
 import com.example.syngrychallenge.data.local.pref.userDataStore
 import com.example.syngrychallenge.data.remote.RemoteDataStore
 import com.example.syngrychallenge.data.remote.services.MoviesService
@@ -47,9 +46,6 @@ val userDataStoreModule = module {
     single { UserDataStore(androidApplication().userDataStore) }
 }
 
-//val userPreferenceModule = module {
-//    factory { UserPreference(get()) }
-//}
 
 val localDataStoreModule = module {
     factory { LocalDataStore(get()) }
