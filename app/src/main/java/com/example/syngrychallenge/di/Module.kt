@@ -10,13 +10,14 @@ import com.example.syngrychallenge.data.remote.services.MoviesService
 import com.example.syngrychallenge.domain.repository.IRepository
 import com.example.syngrychallenge.domain.usecase.UsersInteractor
 import com.example.syngrychallenge.domain.usecase.UsersUseCase
-import com.example.syngrychallenge.ui.viewModel.HomeViewModel
-import com.example.syngrychallenge.ui.viewModel.LoginViewModel
-import com.example.syngrychallenge.ui.viewModel.MovieDetailViewModel
-import com.example.syngrychallenge.ui.viewModel.ProfileViewModel
-import com.example.syngrychallenge.ui.viewModel.RegisterViewModel
+import com.example.syngrychallenge.presentation.home.HomeViewModel
+import com.example.syngrychallenge.presentation.login.LoginViewModel
+import com.example.syngrychallenge.presentation.movieDetail.MovieDetailViewModel
+import com.example.syngrychallenge.presentation.profile.ProfileViewModel
+import com.example.syngrychallenge.presentation.register.RegisterViewModel
+import com.example.syngrychallenge.utils.Constant
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -26,8 +27,22 @@ import java.util.concurrent.TimeUnit
 
 val networkModule = module {
     single {
+        Interceptor { chain ->
+            chain.proceed(
+                chain.request().newBuilder()
+                    .addHeader(Constant.ACCEPT_HEADER_LABEL, Constant.ACCEPT_HEADER_VALUE)
+                    .addHeader(
+                        Constant.AUTHORIZATION_HEADER_LABEL,
+                        Constant.AUTHORIZATION_HEADER_VALUE_HEADER + Constant.AUTHORIZATION_HEADER_VALUE
+                    )
+                    .build()
+            )
+        }
+    }
+    single {
         OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(get<Interceptor>())
+//            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()
@@ -52,12 +67,12 @@ val localDataStoreModule = module {
 }
 
 val remoteDataSourceModule = module {
-    factory { RemoteDataStore(androidApplication(), get()) }
+    factory { RemoteDataStore( get()) }
 }
 
 val repositoryModule = module {
     single { LocalDataStore(get()) }
-    single { RemoteDataStore(get(), get()) }
+    single { RemoteDataStore( get()) }
     single<IRepository> {
         Repository(get(), get())
     }
@@ -74,3 +89,4 @@ val viewModelModule = module {
     viewModel { ProfileViewModel(get()) }
     viewModel { MovieDetailViewModel(get()) }
 }
+

@@ -1,4 +1,4 @@
-package com.example.syngrychallenge.ui
+package com.example.syngrychallenge.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

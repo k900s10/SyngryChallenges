@@ -1,4 +1,4 @@
-package com.example.syngrychallenge.ui
+package com.example.syngrychallenge.presentation.home
 
 import android.content.Context
 import android.os.Bundle
@@ -13,8 +13,6 @@ import com.example.syngrychallenge.R
 import com.example.syngrychallenge.data.remote.response.ApiResponse
 import com.example.syngrychallenge.databinding.FragmentHomeBinding
 import com.example.syngrychallenge.domain.model.NewMoviesModel
-import com.example.syngrychallenge.ui.adapter.HomeAdapter
-import com.example.syngrychallenge.ui.viewModel.HomeViewModel
 import com.example.syngrychallenge.utils.Util.safeNavigate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,7 +41,8 @@ class HomeFragment : Fragment() {
 //
 //        binding.tvUsername.text = getString(R.string.tv_home_username, username)
         btnProfile.setOnClickListener {
-            val destination = HomeFragmentDirections.actionHomeFragmentToProfileFragment()
+            val destination =
+                HomeFragmentDirections.actionHomeFragmentToProfileFragment()
             findNavController().navigate(destination)
         }
 
@@ -104,7 +103,9 @@ class HomeFragment : Fragment() {
 
         binding.btnMovieShowcaseDetails.setOnClickListener {
             val destination =
-                HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movie)
+                HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
+                    movie
+                )
             findNavController().safeNavigate(destination)
         }
     }
@@ -114,7 +115,9 @@ class HomeFragment : Fragment() {
             object : HomeAdapter.OnClickCallback {
                 override fun onItemClicked(movie: NewMoviesModel, context: Context) {
                     val destination =
-                        HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movie)
+                        HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
+                            movie
+                        )
                     findNavController().safeNavigate(destination)
                 }
             })

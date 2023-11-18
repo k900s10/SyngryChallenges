@@ -1,6 +1,7 @@
-package com.example.syngrychallenge.ui
+package com.example.syngrychallenge.presentation.movieDetail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +12,7 @@ import com.example.syngrychallenge.R
 import com.example.syngrychallenge.data.remote.response.ApiResponse
 import com.example.syngrychallenge.databinding.FragmentMovieDetailBinding
 import com.example.syngrychallenge.domain.model.NewMoviesModel
-import com.example.syngrychallenge.ui.adapter.CastsAdapter
-import com.example.syngrychallenge.ui.viewModel.MovieDetailViewModel
+import com.example.syngrychallenge.presentation.profile.CastsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailFragment : Fragment() {
@@ -29,15 +29,20 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val _movie = MovieDetailFragmentArgs.fromBundle(arguments as Bundle).movie
+        val _movie = MovieDetailFragmentArgs.fromBundle(
+            arguments as Bundle
+        ).movie
         val _adapter = CastsAdapter()
         val movieId = _movie.id
         setUi(_movie)
+
 
         viewModel.movieCasts(movieId).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ApiResponse.Success -> {
                     _adapter.submitList(result.data)
+                    Log.d("pantek", _adapter.currentList.toString()  +"," + _adapter.itemCount)
+                    binding.rvCasts.adapter = _adapter
                 }
 
                 is ApiResponse.Error -> {
@@ -51,7 +56,6 @@ class MovieDetailFragment : Fragment() {
                 }
             }
         }
-        binding.rvCasts.adapter = _adapter
     }
 
     override fun onDestroyView() {

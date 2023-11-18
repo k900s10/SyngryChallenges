@@ -13,7 +13,6 @@
     <color name="super_dark_grey">#545454</color>
     <color name="orange">#F1652D</color>
     <color name="green">#48F042</color>
-    <color name="app_background">#121212</color>
+    <color name="app_background">#0a0b0b</color>
     <color name="text">#fefefe</color>
-    <color name="anchor">#1d01f0</color>
 </resources>

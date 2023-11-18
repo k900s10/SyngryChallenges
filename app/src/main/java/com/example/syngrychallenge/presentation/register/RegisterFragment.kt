@@ -1,13 +1,15 @@
-package com.example.syngrychallenge.ui
+package com.example.syngrychallenge.presentation.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.syngrychallenge.R
+import com.example.syngrychallenge.data.local.pref.result.DataStoreResult
 import com.example.syngrychallenge.databinding.FragmentRegisterBinding
-import com.example.syngrychallenge.ui.viewModel.RegisterViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterFragment : Fragment() {
@@ -35,18 +37,30 @@ class RegisterFragment : Fragment() {
         }
 
         btnRegister.setOnClickListener {
+            val progressBar = binding.progressBar
             val inputUsername = binding.etRegisterUsername.text.toString()
             val inputEmail = binding.etRegisterEmail.text.toString()
             val inputPassword = binding.etRegisterPassword.text.toString()
             val inputConfirmPassword = binding.etRegisterConfirmPassword.text.toString()
 
+            progressBar.visibility = View.VISIBLE
             viewModel.createAccount(
                 username = inputUsername,
                 email = inputEmail,
                 password = inputPassword,
                 confirmPassword = inputConfirmPassword
-            )
-            findNavController().popBackStack()
+            ).observe(viewLifecycleOwner) {result ->
+                when (result) {
+                    is DataStoreResult.Success -> {
+                        progressBar.visibility = View.GONE
+                        findNavController().popBackStack()
+                    }
+                    is DataStoreResult.Error -> {
+                        progressBar.visibility = View.GONE
+                        Toast.makeText(activity, R.string.register_failed, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 

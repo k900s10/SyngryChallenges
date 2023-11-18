@@ -1,11 +1,7 @@
 package com.example.syngrychallenge.data.remote
 
-import android.content.Context
-import android.util.Log
-import com.example.syngrychallenge.R
 import com.example.syngrychallenge.data.remote.response.ApiResponse
 import com.example.syngrychallenge.data.remote.services.MoviesService
-import com.example.syngrychallenge.domain.model.ApiHeader
 import com.example.syngrychallenge.domain.model.CastsModel
 import com.example.syngrychallenge.domain.model.NewMoviesModel
 import com.example.syngrychallenge.utils.DataMapper
@@ -14,15 +10,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class RemoteDataStore(private val context: Context, private val service: MoviesService) {
+class RemoteDataStore(private val service: MoviesService) {
 
     fun getNewMovies(): Flow<ApiResponse<List<NewMoviesModel>>> = flow {
         try {
-            val header = getHeader()
-            val response = service.getNewMovies(
-                auth = header.auth,
-                accept = header.accept,
-            )
+            val response = service.getNewMovies()
             val rawData = response.results
 
             if (rawData.isNotEmpty()) {
@@ -36,13 +28,9 @@ class RemoteDataStore(private val context: Context, private val service: MoviesS
         }
     }.flowOn(Dispatchers.IO)
 
-    fun getPopularMovies() : Flow<ApiResponse<List<NewMoviesModel>>> = flow {
+    fun getPopularMovies(): Flow<ApiResponse<List<NewMoviesModel>>> = flow {
         try {
-            val header = getHeader()
-            val response = service.getPopularMovies(
-                auth = header.auth,
-                accept = header.accept
-            )
+            val response = service.getPopularMovies()
             val rawData = response.results
 
             if (rawData.isNotEmpty()) {
@@ -56,16 +44,10 @@ class RemoteDataStore(private val context: Context, private val service: MoviesS
         }
     }.flowOn(Dispatchers.IO)
 
-    fun getMovieCredits(movieId: Int) : Flow<ApiResponse<List<CastsModel>>> = flow {
+    fun getMovieCredits(movieId: Int): Flow<ApiResponse<List<CastsModel>>> = flow {
         try {
-            val header = getHeader()
-            val response = service.getMovieCredits(
-                auth = header.auth,
-                accept = header.accept,
-                movieId = movieId.toString()
-            )
+            val response = service.getMovieCredits(movieId = movieId.toString())
             val rawData = response.cast
-
             if (rawData.isNotEmpty()) {
                 val casts = DataMapper.mapMovieCreditsToDomain(rawData)
                 emit(ApiResponse.Success(casts))
@@ -77,9 +59,4 @@ class RemoteDataStore(private val context: Context, private val service: MoviesS
         }
 
     }.flowOn(Dispatchers.IO)
-
-    private fun getHeader(): ApiHeader = ApiHeader(
-        auth = context.getString(R.string.Failed_attemp),
-        accept = context.getString(R.string.Accept),
-    )
 }

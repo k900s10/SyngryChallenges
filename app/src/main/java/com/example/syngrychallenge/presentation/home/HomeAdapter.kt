@@ -1,4 +1,4 @@
-package com.example.syngrychallenge.ui.adapter
+package com.example.syngrychallenge.presentation.home
 
 import android.content.Context
 import android.view.LayoutInflater

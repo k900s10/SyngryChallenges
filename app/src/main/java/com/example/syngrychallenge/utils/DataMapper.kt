@@ -4,6 +4,8 @@ import com.example.syngrychallenge.data.remote.response.CastItem
 import com.example.syngrychallenge.data.remote.response.ResultsItem
 import com.example.syngrychallenge.domain.model.CastsModel
 import com.example.syngrychallenge.domain.model.NewMoviesModel
+import com.example.syngrychallenge.utils.Util.trimScore
+import com.example.syngrychallenge.utils.Util.worldCalendarFormat
 
 
 object DataMapper {
@@ -14,9 +16,9 @@ object DataMapper {
                 title = response.title,
                 posterPath = response.posterPath,
                 backdropPath = response.backdropPath,
-                releaseDate = response.releaseDate,
+                releaseDate = response.releaseDate.worldCalendarFormat(),
                 popularity = response.popularity,
-                voteAverage = response.voteAverage,
+                voteAverage = response.voteAverage.trimScore(),
                 id = response.id
             )
         }
@@ -31,5 +33,4 @@ object DataMapper {
                 order = response.order
             )
         }
-
 }

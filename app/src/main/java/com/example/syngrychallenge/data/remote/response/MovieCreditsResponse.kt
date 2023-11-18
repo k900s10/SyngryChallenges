@@ -17,17 +17,17 @@ data class MovieCreditsResponse(
 data class CastItem(
 
     @Json(name = "character")
-    val character: String,
+    val character: String?,
 
     @Json(name = "original_name")
-    val originalName: String,
+    val originalName: String?,
 
     @Json(name = "profile_path")
-    val profilePath: String,
+    val profilePath: String?,
 
     @Json(name = "id")
-    val id: Int,
+    val id: Int?,
 
     @Json(name = "order")
-    val order: Int
+    val order: Int?
 )

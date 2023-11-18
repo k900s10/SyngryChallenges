@@ -25,17 +25,16 @@ class Repository(
         val preference = localDataStore.auth()
 
         return input.email == preference.email && input.password == preference.password
-
     }
 
-    override suspend fun createAccount(registerModel: RegisterModel) =
+    override fun createAccount(registerModel: RegisterModel) =
         localDataStore.createAccount(registerModel)
 
-    override suspend fun createLoginSession() = localDataStore.createLoginSession()
+    override fun createLoginSession() = localDataStore.createLoginSession()
 
-    override suspend fun logout() = localDataStore.logout()
+    override fun logout() = localDataStore.logout()
 
-    override suspend fun updateProfile(profileModel: ProfileModel) =
+    override fun updateProfile(profileModel: ProfileModel) =
         localDataStore.updateProfile(profileModel)
 
     override fun getNewMovie(): Flow<ApiResponse<List<NewMoviesModel>>> =

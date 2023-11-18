@@ -1,5 +1,6 @@
 package com.example.syngrychallenge.domain.usecase
 
+import com.example.syngrychallenge.data.local.pref.result.DataStoreResult
 import com.example.syngrychallenge.data.remote.response.ApiResponse
 import com.example.syngrychallenge.domain.model.CastsModel
 import com.example.syngrychallenge.domain.model.LoginModel
@@ -15,12 +16,12 @@ interface UsersUseCase {
 
     suspend fun auth(input: LoginModel): Boolean
 
-    suspend fun createAccount(registerModel: RegisterModel)
-    suspend fun createLoginSession()
+    fun createAccount(registerModel: RegisterModel): Flow<DataStoreResult>
+    fun createLoginSession(): Flow<DataStoreResult>
 
-    suspend fun logout()
+    fun logout(): Flow<DataStoreResult>
 
-    suspend fun updateProfile(profileModel: ProfileModel)
+    fun updateProfile(profileModel: ProfileModel): Flow<DataStoreResult>
 
     fun getNewMovie(): Flow<ApiResponse<List<NewMoviesModel>>>
 

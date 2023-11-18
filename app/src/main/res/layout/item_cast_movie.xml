@@ -4,7 +4,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="8dp">
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingEnd="8dp"
+    >
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/siv_movie_poster"
@@ -24,8 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:maxEms="7"
+        android:maxEms="6"
         android:maxLines="1"
+        android:ellipsize="end"
         android:text="@string/tv_cast_original_name"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/siv_movie_poster"
@@ -39,6 +43,9 @@
         android:layout_marginTop="4dp"
         android:text="@string/tv_cast_character"
         android:textColor="@color/grey"
+        android:maxEms="6"
+        android:maxLines="1"
+        android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="@+id/siv_movie_poster"
         app:layout_constraintStart_toStartOf="@+id/siv_movie_poster"
         app:layout_constraintTop_toBottomOf="@+id/tv_original_name" />

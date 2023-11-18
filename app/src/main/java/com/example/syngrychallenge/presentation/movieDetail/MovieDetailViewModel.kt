@@ -1,4 +1,4 @@
-package com.example.syngrychallenge.ui.viewModel
+package com.example.syngrychallenge.presentation.movieDetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -10,4 +10,5 @@ import com.example.syngrychallenge.domain.usecase.UsersUseCase
 class MovieDetailViewModel(private val useCase: UsersUseCase) : ViewModel() {
     fun movieCasts(movieId: Int): LiveData<ApiResponse<List<CastsModel>>> =
         useCase.getMovieCasts(movieId).asLiveData()
+
 }

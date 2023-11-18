@@ -1,19 +1,20 @@
 package com.example.syngrychallenge.data.local.pref
 
 import android.content.Context
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.example.syngrychallenge.data.local.pref.result.DataStoreResult
 import com.example.syngrychallenge.domain.model.LoginModel
 import com.example.syngrychallenge.domain.model.ProfileModel
 import com.example.syngrychallenge.domain.model.RegisterModel
 import com.example.syngrychallenge.utils.Constant.USER_PREF
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
 val Context.userDataStore: DataStore<Preferences> by preferencesDataStore(USER_PREF)
@@ -43,36 +44,56 @@ class UserDataStore(private val dataStore: DataStore<Preferences>) {
     suspend fun auth(): LoginModel =
         LoginModel(
             email = dataStore.data.first()[EMAIL_KEY],
-                password = dataStore.data.first()[PASSWORD_KEY]
-            )
+            password = dataStore.data.first()[PASSWORD_KEY]
+        )
 
 
-    suspend fun createAccount(registerModel: RegisterModel) {
-        dataStore.edit { preference ->
-            preference[USERNAME_KEY] = registerModel.username
-            preference[EMAIL_KEY] = registerModel.email
-            preference[PASSWORD_KEY] = registerModel.password
+    fun createAccount(registerModel: RegisterModel): Flow<DataStoreResult> = flow {
+        try {
+            dataStore.edit { preference ->
+                preference[USERNAME_KEY] = registerModel.username
+                preference[EMAIL_KEY] = registerModel.email
+                preference[PASSWORD_KEY] = registerModel.password
+            }
+            emit(DataStoreResult.Success)
+        } catch (e: Exception) {
+            emit(DataStoreResult.Error)
         }
     }
 
-    suspend fun createLoginSession() {
-        dataStore.edit { preference ->
-            preference[IS_LOGIN_KEY] = true
+    fun createLoginSession(): Flow<DataStoreResult> = flow {
+        try {
+            dataStore.edit { preference ->
+                preference[IS_LOGIN_KEY] = true
+            }
+            emit(DataStoreResult.Success)
+        } catch (e: Exception) {
+            emit(DataStoreResult.Error)
         }
     }
 
-    suspend fun logout() {
-        dataStore.edit { preference ->
-            preference[IS_LOGIN_KEY] = false
+    fun logout(): Flow<DataStoreResult> = flow {
+        try {
+            dataStore.edit { preference ->
+                preference[IS_LOGIN_KEY] = false
+            }
+            emit(DataStoreResult.Success)
+        } catch (e: Exception) {
+            emit(DataStoreResult.Error)
         }
     }
 
-    suspend fun updateProfile(input: ProfileModel) {
-        dataStore.edit { preference ->
-            preference[USERNAME_KEY] = input.username.toString()
-            preference[NAME_KEY] = input.name.toString()
-            preference[BIRTHDAY_KEY] = input.birthday.toString()
-            preference[ADDRESS_KEY] = input.address.toString()
+    fun updateProfile(input: ProfileModel): Flow<DataStoreResult> = flow {
+        try {
+            dataStore.edit { preference ->
+                preference[USERNAME_KEY] = input.username.toString()
+                preference[NAME_KEY] = input.name.toString()
+                preference[BIRTHDAY_KEY] = input.birthday.toString()
+                preference[ADDRESS_KEY] = input.address.toString()
+            }
+            emit(DataStoreResult.Success)
+        } catch (e: Exception) {
+            emit(DataStoreResult.Error)
         }
     }
 }

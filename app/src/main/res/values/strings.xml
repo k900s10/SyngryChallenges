@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SyngryChallenge</string>
+    <string name="app_name">Movie App</string>
 
     <!--  Login  -->
     <string name="tv_login_title">Sign In</string>
@@ -15,7 +15,6 @@
     <string name="et_profile_name_hint">Full name</string>
     <string name="et_profile_birth_hint">Birth Date</string>
     <string name="et_profile_address_hint">Address</string>
-    <string name="sw_enable_edit_profile">Edit</string>
     <string name="btn_edit_profile">Update Profile</string>
     <string name="btn_logout">Logout</string>
 
@@ -32,16 +31,12 @@
     <string name="btn_details_homepage">Homepage</string>
     <string name="tv_prolog_label">Prolog</string>
     <string name="tv_movie_score">%s Score</string>
-    <string name="tv_movie_title">Finding Nemo</string>
-    <string name="tv_movie_release_date">2023</string>
     <string name="tv_movie_duration">2h 2m</string>
     <string name="tv_top_cast_label">Top Cast</string>
-    <string name="tv_prolog_description">Nemo, an adventurous young clownfish, is unexpectedly taken from his Great Barrier Reef home to a dentist\'s office aquarium. It\'s up to his worrisome father Marlin and a friendly but forgetful fish Dory to bring Nemo home — meeting vegetarian sharks, surfer dude turtles, hypnotic jellyfish, hungry seagulls, and more along the way.</string>
     <string name="tv_cast_original_name">Willem Dafoe</string>
     <string name="tv_cast_character">Gill (voice)</string>
 
     <!--  Home  -->
-    <string name="tv_home_username">Welcome, %1$s</string>
     <string name="tv_home_popular_label">Trending Now</string>
     <string name="tv_home_new_movie_label">Just Release</string>
     <string name="tv_home_detail_label">Details</string>
@@ -49,17 +44,15 @@
 
 
     <!--  Toast text  -->
-    <string name="login_success">Login Success</string>
     <string name="login_failed">Account is not found</string>
+    <string name="logout_failed">Logout failed</string>
+    <string name="register_failed">Register failed</string>
+    <string name="update_profile_failed">Failed updating profile</string>
 
 
     <!--  API  -->
-    <string name="sort_by_release_date_desc">primary_release_date.desc</string>
-    <string name="sort_by_popularity_desc">popularity.desc</string>
     <string name="response_failed">Uknown error. Please restart the app</string>
     <string name="response_empty">Empty data…</string>
     <string name="poster_url">https://image.tmdb.org/t/p/original/%1$s</string>
     <string name="api_url">https://api.themoviedb.org/3/</string>
-    <string name="Failed_attemp">Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMTI5ZGRlMmVkNDc0MzI4YTJmYzVhM2QxNzNiZGQ2MiIsInN1YiI6IjY1NDFmYzRiMWFjMjkyMDBhYmQ2ZDE3YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bw3IcRKM_bj8kHz5qmPHSlqXGX8W03sO-FrJkSx0xQ4</string>
-    <string name="Accept">application/json</string>
 </resources>

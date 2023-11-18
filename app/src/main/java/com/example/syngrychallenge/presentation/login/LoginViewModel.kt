@@ -1,4 +1,4 @@
-package com.example.syngrychallenge.ui.viewModel
+package com.example.syngrychallenge.presentation.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,7 +29,5 @@ class LoginViewModel(private val useCase: UsersUseCase) : ViewModel() {
         }
     }
 
-    fun createLoginSession() = viewModelScope.launch {
-        useCase.createLoginSession()
-    }
+    val createLoginSession = useCase.createLoginSession().asLiveData()
 }

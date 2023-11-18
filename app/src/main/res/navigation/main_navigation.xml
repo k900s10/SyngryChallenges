@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.syngrychallenge.ui.LoginFragment"
+        android:name="com.example.syngrychallenge.presentation.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -23,19 +23,21 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.syngrychallenge.ui.RegisterFragment"
+        android:name="com.example.syngrychallenge.presentation.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register">
     </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.syngrychallenge.ui.HomeFragment"
+        android:name="com.example.syngrychallenge.presentation.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim" />
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -45,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.example.syngrychallenge.ui.MovieDetailFragment"
+        android:name="com.example.syngrychallenge.presentation.movieDetail.MovieDetailFragment"
         android:label="MovieDetailFragment">
         <argument
             android:name="movie"
@@ -53,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.syngrychallenge.ui.ProfileFragment"
+        android:name="com.example.syngrychallenge.presentation.profile.ProfileFragment"
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"

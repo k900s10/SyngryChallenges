@@ -1,4 +1,5 @@
 package com.example.syngrychallenge.domain.repository
+import com.example.syngrychallenge.data.local.pref.result.DataStoreResult
 import com.example.syngrychallenge.data.remote.response.ApiResponse
 import com.example.syngrychallenge.domain.model.CastsModel
 import com.example.syngrychallenge.domain.model.LoginModel
@@ -12,13 +13,13 @@ interface IRepository {
 
     fun getProfile(): Flow<ProfileModel>
 
-    suspend fun createAccount(registerModel: RegisterModel)
+    fun createAccount(registerModel: RegisterModel): Flow<DataStoreResult>
 
-    suspend fun createLoginSession()
+    fun createLoginSession(): Flow<DataStoreResult>
 
-    suspend fun logout()
+    fun logout(): Flow<DataStoreResult>
 
-    suspend fun updateProfile(profileModel: ProfileModel)
+    fun updateProfile(profileModel: ProfileModel): Flow<DataStoreResult>
     suspend fun auth(input: LoginModel): Boolean
 
     fun getNewMovie(): Flow<ApiResponse<List<NewMoviesModel>>>
