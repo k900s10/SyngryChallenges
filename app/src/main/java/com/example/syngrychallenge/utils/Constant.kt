@@ -8,6 +8,7 @@ object Constant {
     const val ACCEPT_HEADER_LABEL = "accept"
     const val AUTHORIZATION_HEADER_LABEL = "Authorization"
     const val ACCEPT_HEADER_VALUE = "application/json"
-    const val AUTHORIZATION_HEADER_VALUE = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMTI5ZGRlMmVkNDc0MzI4YTJmYzVhM2QxNzNiZGQ2MiIsInN1YiI6IjY1NDFmYzRiMWFjMjkyMDBhYmQ2ZDE3YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bw3IcRKM_bj8kHz5qmPHSlqXGX8W03sO-FrJkSx0xQ4"
+    //Please paste your themoviedb.org API key into AUTHORIZATION_HEADER_VALUE below before running the app.
+    const val AUTHORIZATION_HEADER_VALUE = "PASTE YOUR OWN API KEY"
     const val AUTHORIZATION_HEADER_VALUE_HEADER = "Bearer "
 }
