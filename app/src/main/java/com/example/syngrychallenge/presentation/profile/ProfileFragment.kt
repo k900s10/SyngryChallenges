@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.syngrychallenge.R
-import com.example.syngrychallenge.data.local.pref.result.DataStoreResult
+import com.example.core.data.local.pref.result.DataStoreResult
 import com.example.syngrychallenge.databinding.FragmentProfileBinding
-import com.example.syngrychallenge.utils.Util.safeNavigate
+import com.example.syngrychallenge.utils.AppUtils.safeNavigate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {

@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "SyngryChallenge"
 include(":app")
+include(":core")
+include(":testing")

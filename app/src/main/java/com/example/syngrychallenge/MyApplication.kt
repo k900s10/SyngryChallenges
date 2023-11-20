@@ -1,12 +1,12 @@
 package com.example.syngrychallenge
 
 import android.app.Application
-import com.example.syngrychallenge.di.localDataStoreModule
-import com.example.syngrychallenge.di.networkModule
-import com.example.syngrychallenge.di.remoteDataSourceModule
-import com.example.syngrychallenge.di.repositoryModule
-import com.example.syngrychallenge.di.userDataStoreModule
-import com.example.syngrychallenge.di.usersUseCaseModule
+import com.example.core.di.localDataStoreModule
+import com.example.core.di.networkModule
+import com.example.core.di.remoteDataSourceModule
+import com.example.core.di.repositoryModule
+import com.example.core.di.userDataStoreModule
+import com.example.syngrychallenge.di.useCaseModule
 import com.example.syngrychallenge.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -17,7 +17,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            androidLogger(Level.NONE)
+            androidLogger(Level.ERROR)
             androidContext(this@MyApplication)
             modules(
                 listOf(
@@ -26,8 +26,8 @@ class MyApplication : Application() {
                     localDataStoreModule,
                     remoteDataSourceModule,
                     repositoryModule,
+                    useCaseModule,
                     viewModelModule,
-                    usersUseCaseModule
                 )
             )
         }

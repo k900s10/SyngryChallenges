@@ -3,9 +3,9 @@ package com.example.syngrychallenge.presentation.profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.example.syngrychallenge.data.local.pref.result.DataStoreResult
-import com.example.syngrychallenge.domain.model.ProfileModel
-import com.example.syngrychallenge.domain.usecase.UsersUseCase
+import com.example.core.data.local.pref.result.DataStoreResult
+import com.example.core.domain.model.ProfileModel
+import com.example.core.domain.usecase.UsersUseCase
 
 class ProfileViewModel(private val useCase: UsersUseCase) : ViewModel() {
 

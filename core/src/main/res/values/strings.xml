@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">core</string>
+
+    //cast
+    <string name="tv_top_cast_label">Top Cast</string>
+    <string name="tv_cast_original_name">Willem Dafoe</string>
+    <string name="tv_cast_character">Gill (voice)</string>
+
+</resources>

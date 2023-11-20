@@ -51,7 +51,7 @@
         android:label="MovieDetailFragment">
         <argument
             android:name="movie"
-            app:argType="com.example.syngrychallenge.domain.model.NewMoviesModel" />
+            app:argType="com.example.core.domain.model.NewMoviesModel" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

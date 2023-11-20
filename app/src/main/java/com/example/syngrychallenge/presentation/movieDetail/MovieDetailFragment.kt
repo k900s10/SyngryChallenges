@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.syngrychallenge.R
-import com.example.syngrychallenge.data.remote.response.ApiResponse
+import com.example.core.data.remote.response.ApiResponse
 import com.example.syngrychallenge.databinding.FragmentMovieDetailBinding
-import com.example.syngrychallenge.domain.model.NewMoviesModel
-import com.example.syngrychallenge.presentation.profile.CastsAdapter
+import com.example.core.domain.model.NewMoviesModel
+import com.example.core.presentation.CastsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailFragment : Fragment() {
@@ -41,7 +41,6 @@ class MovieDetailFragment : Fragment() {
             when (result) {
                 is ApiResponse.Success -> {
                     _adapter.submitList(result.data)
-                    Log.d("pantek", _adapter.currentList.toString()  +"," + _adapter.itemCount)
                     binding.rvCasts.adapter = _adapter
                 }
 

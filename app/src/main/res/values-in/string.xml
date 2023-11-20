@@ -33,9 +33,6 @@
     <string name="tv_prolog_label">Deskripsi</string>
     <string name="tv_movie_score">%s Skor</string>
     <string name="tv_movie_duration">2h 2m</string>
-    <string name="tv_top_cast_label">Daftar Aktor</string>
-    <string name="tv_cast_original_name">Willem Dafoe</string>
-    <string name="tv_cast_character">Gill (voice)</string>
 
     <!--  Home  -->
     <string name="tv_home_popular_label">Sedang trending</string>

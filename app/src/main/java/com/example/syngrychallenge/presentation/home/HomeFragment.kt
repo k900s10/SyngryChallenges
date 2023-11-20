@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.core.data.remote.response.ApiResponse
+import com.example.core.domain.model.NewMoviesModel
+import com.example.core.presentation.HomeAdapter
+import com.example.core.utils.CoreConstant
 import com.example.syngrychallenge.R
-import com.example.syngrychallenge.data.remote.response.ApiResponse
 import com.example.syngrychallenge.databinding.FragmentHomeBinding
-import com.example.syngrychallenge.domain.model.NewMoviesModel
-import com.example.syngrychallenge.utils.Util.safeNavigate
+import com.example.syngrychallenge.utils.AppUtils.safeNavigate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -98,7 +100,7 @@ class HomeFragment : Fragment() {
     private fun bindPoster(movie: NewMoviesModel) {
         Glide
             .with(requireActivity())
-            .load(getString(R.string.poster_url, movie.posterPath))
+            .load(CoreConstant.MOVIE_POSTER_URL + movie.posterPath)
             .into(binding.ivPromotionMoviePoster)
 
         binding.btnMovieShowcaseDetails.setOnClickListener {
@@ -106,6 +108,7 @@ class HomeFragment : Fragment() {
                 HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
                     movie
                 )
+
             findNavController().safeNavigate(destination)
         }
     }
