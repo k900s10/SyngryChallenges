@@ -45,7 +45,8 @@
     <string name="logout_failed">Logout failed</string>
     <string name="register_failed">Register failed</string>
     <string name="update_profile_failed">Failed updating profile</string>
-
+    <string name="select_image">Select image</string>
+    <string name="missing_image">Image is missing</string>
 
     <!--  API  -->
     <string name="response_failed">Uknown error. Please restart the app</string>

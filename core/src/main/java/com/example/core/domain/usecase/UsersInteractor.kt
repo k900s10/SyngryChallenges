@@ -1,5 +1,7 @@
 package com.example.core.domain.usecase
 
+import android.net.Uri
+import com.example.core.data.PhotoProfileResult
 import com.example.core.data.local.pref.result.DataStoreResult
 import com.example.core.data.remote.response.ApiResponse
 import com.example.core.domain.model.CastsModel
@@ -24,7 +26,8 @@ class UsersInteractor(private val iRepository: IRepository) : UsersUseCase {
 
     override fun logout(): Flow<DataStoreResult> = iRepository.logout()
 
-    override fun updateProfile(profileModel: ProfileModel): Flow<DataStoreResult> = iRepository.updateProfile(profileModel)
+    override fun updateProfile(profileModel: ProfileModel): Flow<DataStoreResult> =
+        iRepository.updateProfile(profileModel)
 
     override fun getNewMovie(): Flow<ApiResponse<List<NewMoviesModel>>> = iRepository.getNewMovie()
 
@@ -33,4 +36,7 @@ class UsersInteractor(private val iRepository: IRepository) : UsersUseCase {
 
     override fun getMovieCasts(movieId: Int): Flow<ApiResponse<List<CastsModel>>> =
         iRepository.getMovieCasts(movieId)
+
+    override fun imageToBitmap(uri: Uri): Flow<PhotoProfileResult<String>> =
+        iRepository.imageToBitmap(uri)
 }

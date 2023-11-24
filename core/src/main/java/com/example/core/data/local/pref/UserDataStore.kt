@@ -27,6 +27,7 @@ class UserDataStore(private val dataStore: DataStore<Preferences>) {
     private val NAME_KEY = stringPreferencesKey("name_key")
     private val BIRTHDAY_KEY = stringPreferencesKey("birthday_key")
     private val ADDRESS_KEY = stringPreferencesKey("address_key")
+    private val PHOTO_PROFILE_KEY = stringPreferencesKey("photo_profile_key")
 
     val isLogin: Flow<Boolean> = dataStore.data.map { preference ->
         preference[IS_LOGIN_KEY] ?: false
@@ -37,7 +38,8 @@ class UserDataStore(private val dataStore: DataStore<Preferences>) {
             username = preference[USERNAME_KEY],
             name = preference[NAME_KEY],
             birthday = preference[BIRTHDAY_KEY],
-            address = preference[ADDRESS_KEY]
+            address = preference[ADDRESS_KEY],
+            photoProfilePath = preference[PHOTO_PROFILE_KEY]
         )
     }
 
@@ -90,6 +92,7 @@ class UserDataStore(private val dataStore: DataStore<Preferences>) {
                 preference[NAME_KEY] = input.name.toString()
                 preference[BIRTHDAY_KEY] = input.birthday.toString()
                 preference[ADDRESS_KEY] = input.address.toString()
+                preference[PHOTO_PROFILE_KEY] = input.photoProfilePath.toString()
             }
             emit(DataStoreResult.Success)
         } catch (e: Exception) {

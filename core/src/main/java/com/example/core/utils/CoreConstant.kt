@@ -4,7 +4,6 @@ object CoreConstant {
     //preference
     const val USER_PREF = "user_pref"
 
-
     //movie api url
     val MOVIE_POSTER_URL = "https://image.tmdb.org/t/p/original/"
     val MOVIES_URL = "https://api.themoviedb.org/3/"

@@ -46,6 +46,8 @@
     <string name="logout_failed">Logout gagal</string>
     <string name="register_failed">Daftar gagal</string>
     <string name="update_profile_failed">Gagal mengubah profil</string>
+    <string name="select_image">Pilih foto</string>
+    <string name="missing_image">Foto tidak ditemukan</string>
 
 
     <!--  API  -->

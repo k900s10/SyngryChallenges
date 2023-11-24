@@ -69,6 +69,6 @@ val repositoryModule = module {
     single { LocalDataStore(get()) }
     single { RemoteDataStore(get()) }
     single<IRepository> {
-        Repository(get(), get())
+        Repository(get(), get(), get())
     }
 }
