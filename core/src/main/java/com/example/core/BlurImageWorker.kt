@@ -26,7 +26,7 @@ class BlurImageWorker(
     context: Context,
     params: WorkerParameters,
 ) : CoroutineWorker(context, params), KoinComponent {
-    private val UpdatePhotoProfileUseCase: UpdatePhotoProfileUseCase by inject()
+    private val updatePhotoProfileUseCase: UpdatePhotoProfileUseCase by inject()
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     override suspend fun doWork(): Result {
@@ -41,7 +41,7 @@ class BlurImageWorker(
                 val imageBitmap = path.pathToBitmap()
                 val blurImage = blurBitmap(imageBitmap, 5)
                 val blurImagePath = blurImage.saveImage(applicationContext)
-                val saveToDatastore = UpdatePhotoProfileUseCase.saveProfilePicture(blurImagePath)
+                val saveToDatastore = updatePhotoProfileUseCase.saveProfilePicture(blurImagePath)
 
                 when (saveToDatastore) {
                     is DataStoreResult.Success ->

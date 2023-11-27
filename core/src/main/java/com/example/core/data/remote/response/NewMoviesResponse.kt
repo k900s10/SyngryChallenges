@@ -23,26 +23,26 @@ data class NewMoviesResponse(
 data class ResultsItem(
 
 	@Json(name="overview")
-	val overview: String,
+	val overview: String?,
 
 	@Json(name="title")
-	val title: String,
+	val title: String?,
 
 	@Json(name="poster_path")
-	val posterPath: String,
+	val posterPath: String?,
 
 	@Json(name="backdrop_path")
-	val backdropPath: String,
+	val backdropPath: String?,
 
 	@Json(name="release_date")
-	val releaseDate: String,
+	val releaseDate: String?,
 
 	@Json(name="popularity")
-	val popularity: String,
+	val popularity: String?,
 
 	@Json(name="vote_average")
-	val voteAverage: String,
+	val voteAverage: String?,
 
 	@Json(name="id")
-	val id: Int,
+	val id: Int?,
 )
