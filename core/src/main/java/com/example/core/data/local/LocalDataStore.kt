@@ -23,4 +23,6 @@ class LocalDataStore(private val userPreference: UserDataStore) {
 
     fun updateProfile(profileModel: ProfileModel): Flow<DataStoreResult> =
         userPreference.updateProfile(profileModel)
+
+    suspend fun setProfilePicture(input: String): DataStoreResult = userPreference.setProfilePicture(input)
 }

@@ -6,5 +6,5 @@ data class ProfileModel(
     val name: String?,
     val birthday: String?,
     val address: String?,
-    val photoProfilePath: String?
+    val photoProfilePath: String? = ""
 )

@@ -6,4 +6,7 @@
     <string name="tv_cast_original_name">Willem Dafoe</string>
     <string name="tv_cast_character">Gill (voice)</string>
 
+    //worker
+    <string name="saving_image_success">Successfully saving image</string>
+    <string name="saving_image_failed">Successfully saving image</string>
 </resources>

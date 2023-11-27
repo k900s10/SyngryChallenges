@@ -1,6 +1,7 @@
 package com.example.core.data.local.pref
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -92,11 +93,22 @@ class UserDataStore(private val dataStore: DataStore<Preferences>) {
                 preference[NAME_KEY] = input.name.toString()
                 preference[BIRTHDAY_KEY] = input.birthday.toString()
                 preference[ADDRESS_KEY] = input.address.toString()
-                preference[PHOTO_PROFILE_KEY] = input.photoProfilePath.toString()
+//                preference[PHOTO_PROFILE_KEY] = input.photoProfilePath.toString()
             }
             emit(DataStoreResult.Success)
         } catch (e: Exception) {
             emit(DataStoreResult.Error)
         }
     }
+
+    suspend fun setProfilePicture(input: String): DataStoreResult =
+        try {
+            dataStore.edit { preference ->
+                preference[PHOTO_PROFILE_KEY] = input
+            }
+            DataStoreResult.Success
+        } catch (e: Exception) {
+            Log.e("setProfilePicture", "setProfilePicture: ", e)
+            DataStoreResult.Error
+        }
 }
