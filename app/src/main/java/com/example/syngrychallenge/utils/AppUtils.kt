@@ -10,5 +10,4 @@ object AppUtils {
             navigate(direction)
         }
     }
-
 }

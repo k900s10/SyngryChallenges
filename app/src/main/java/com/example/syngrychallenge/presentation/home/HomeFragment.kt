@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.core.data.remote.response.ApiResponse
 import com.example.core.domain.model.NewMoviesModel
 import com.example.core.presentation.HomeAdapter
 import com.example.core.utils.CoreConstant
+import com.example.core.utils.result.GetMoviesResult
 import com.example.syngrychallenge.R
 import com.example.syngrychallenge.databinding.FragmentHomeBinding
 import com.example.syngrychallenge.utils.AppUtils.safeNavigate
@@ -36,8 +36,6 @@ class HomeFragment : Fragment() {
 
         val newMoviesAdapter = HomeAdapter()
         val popularMoviesAdapter = HomeAdapter()
-        val rvNewMovie = binding.rvNewMovie
-        val rvTrendingMovie = binding.rvTrendingMovie
         val btnProfile = binding.ivProfile
 //        val username = HomeFragmentArgs.fromBundle(arguments as Bundle).username
 //
@@ -50,35 +48,26 @@ class HomeFragment : Fragment() {
 
         viewModel.popularMovies.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is ApiResponse.Success -> {
+                is GetMoviesResult.Success -> {
                     val movies = result.data
                     bindPoster(movies[0])
                     popularMoviesAdapter.submitList(movies)
                 }
 
-                is ApiResponse.Error ->
+                is GetMoviesResult.Failed ->
                     Toast.makeText(activity, getString(R.string.response_failed), Toast.LENGTH_LONG)
-                        .show()
-
-                is ApiResponse.Empty ->
-                    Toast.makeText(activity, getString(R.string.response_empty), Toast.LENGTH_LONG)
                         .show()
             }
         }
 
         viewModel.newMovies.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is ApiResponse.Success -> {
+                is GetMoviesResult.Success -> {
                     newMoviesAdapter.submitList(result.data)
                 }
 
-                is ApiResponse.Error -> {
+                is GetMoviesResult.Failed -> {
                     Toast.makeText(activity, getString(R.string.response_failed), Toast.LENGTH_LONG)
-                        .show()
-                }
-
-                is ApiResponse.Empty -> {
-                    Toast.makeText(activity, getString(R.string.response_empty), Toast.LENGTH_LONG)
                         .show()
                 }
             }

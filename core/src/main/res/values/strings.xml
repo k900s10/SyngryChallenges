@@ -8,5 +8,5 @@
 
     //worker
     <string name="saving_image_success">Successfully saving image</string>
-    <string name="saving_image_failed">Successfully saving image</string>
+    <string name="saving_image_failed">Failed saving image</string>
 </resources>

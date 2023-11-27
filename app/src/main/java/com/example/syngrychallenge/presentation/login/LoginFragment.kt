@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.core.data.local.pref.result.DataStoreResult
+import com.example.core.utils.result.AuthResult
 import com.example.syngrychallenge.R
 import com.example.syngrychallenge.databinding.FragmentLoginBinding
 import com.example.syngrychallenge.utils.AppUtils.safeNavigate
@@ -53,32 +53,16 @@ class LoginFragment : Fragment() {
             val progressBar = binding.progressBar
 
             progressBar.visibility = View.VISIBLE
-            viewModel.auth(inputEmail, inputPassword)
-            viewModel.validation.observe(viewLifecycleOwner) { validation ->
-                when (validation) {
-                    true -> {
-                        viewModel.createLoginSession.observe(viewLifecycleOwner) { result ->
-                            when (result) {
-                                is DataStoreResult.Success -> {
-                                    progressBar.visibility = View.GONE
-                                    val destination =
-                                        LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                                    findNavController().safeNavigate(destination)
-                                }
-
-                                is DataStoreResult.Error -> {
-                                    progressBar.visibility = View.GONE
-                                    Toast.makeText(
-                                        activity,
-                                        R.string.login_failed,
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
-                            }
-                        }
+            viewModel.auth(inputEmail, inputPassword).observe(viewLifecycleOwner) { auth ->
+                when (auth) {
+                    AuthResult.Success -> {
+                        progressBar.visibility = View.GONE
+                        val destination =
+                            LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                        findNavController().safeNavigate(destination)
                     }
 
-                    false -> {
+                    AuthResult.Failed -> {
                         progressBar.visibility = View.GONE
                         Toast.makeText(
                             activity,
@@ -86,9 +70,44 @@ class LoginFragment : Fragment() {
                             Toast.LENGTH_LONG
                         ).show()
                     }
-
                 }
+
             }
+//            viewModel.validation.observe(viewLifecycleOwner) { validation ->
+//                when (validation) {
+//                    true -> {
+//                        viewModel.createLoginSession.observe(viewLifecycleOwner) { result ->
+//                            when (result) {
+//                                is DataStoreResult.Success -> {
+//                                    progressBar.visibility = View.GONE
+//                                    val destination =
+//                                        LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+//                                    findNavController().safeNavigate(destination)
+//                                }
+//
+//                                is DataStoreResult.Error -> {
+//                                    progressBar.visibility = View.GONE
+//                                    Toast.makeText(
+//                                        activity,
+//                                        R.string.login_failed,
+//                                        Toast.LENGTH_LONG
+//                                    ).show()
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    false -> {
+//                        progressBar.visibility = View.GONE
+//                        Toast.makeText(
+//                            activity,
+//                            getString(R.string.login_failed),
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                    }
+//
+//                }
+//            }
         }
     }
 

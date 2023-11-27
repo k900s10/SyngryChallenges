@@ -64,16 +64,26 @@ class UserDataStore(private val dataStore: DataStore<Preferences>) {
         }
     }
 
-    fun createLoginSession(): Flow<DataStoreResult> = flow {
+    suspend fun createLoginSession(): DataStoreResult =
         try {
             dataStore.edit { preference ->
                 preference[IS_LOGIN_KEY] = true
             }
-            emit(DataStoreResult.Success)
+            DataStoreResult.Success
         } catch (e: Exception) {
-            emit(DataStoreResult.Error)
+            DataStoreResult.Error
         }
-    }
+
+//    fun createLoginSession(): Flow<DataStoreResult> = flow {
+//        try {
+//            dataStore.edit { preference ->
+//                preference[IS_LOGIN_KEY] = true
+//            }
+//            emit(DataStoreResult.Success)
+//        } catch (e: Exception) {
+//            emit(DataStoreResult.Error)
+//        }
+//    }
 
     fun logout(): Flow<DataStoreResult> = flow {
         try {
@@ -101,7 +111,7 @@ class UserDataStore(private val dataStore: DataStore<Preferences>) {
         }
     }
 
-    suspend fun setProfilePicture(input: String): DataStoreResult =
+    suspend fun saveProfilePicture(input: String): DataStoreResult =
         try {
             dataStore.edit { preference ->
                 preference[PHOTO_PROFILE_KEY] = input

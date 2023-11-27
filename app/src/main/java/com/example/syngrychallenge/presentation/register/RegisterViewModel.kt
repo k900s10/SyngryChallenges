@@ -5,10 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.core.data.local.pref.result.DataStoreResult
 import com.example.core.domain.model.RegisterModel
-import com.example.core.domain.usecase.UsersUseCase
+import com.example.core.domain.usecase.CreateAccountUseCase
 import kotlinx.coroutines.flow.flow
 
-class RegisterViewModel(private val useCase: UsersUseCase) : ViewModel() {
+class RegisterViewModel(
+    private val createAccountUseCase: CreateAccountUseCase
+) : ViewModel() {
 
     fun createAccount(
         username: String,
@@ -22,7 +24,7 @@ class RegisterViewModel(private val useCase: UsersUseCase) : ViewModel() {
                 email = email,
                 password = password
             )
-            return useCase.createAccount(registerModel).asLiveData()
+            return createAccountUseCase.createAccount(registerModel).asLiveData()
         }
         return flow<DataStoreResult> { DataStoreResult.Error }.asLiveData()
     }

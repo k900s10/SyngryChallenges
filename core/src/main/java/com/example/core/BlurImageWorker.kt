@@ -11,7 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.core.data.local.pref.result.DataStoreResult
-import com.example.core.domain.repository.IRepository
+import com.example.core.domain.usecase.UpdatePhotoProfileUseCase
 import com.example.core.utils.CoreConstant
 import com.example.core.utils.WorkerUtils.blurBitmap
 import com.example.core.utils.WorkerUtils.makeStatusNotification
@@ -26,7 +26,7 @@ class BlurImageWorker(
     context: Context,
     params: WorkerParameters,
 ) : CoroutineWorker(context, params), KoinComponent {
-    private val repository: IRepository by inject()
+    private val UpdatePhotoProfileUseCase: UpdatePhotoProfileUseCase by inject()
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     override suspend fun doWork(): Result {
@@ -41,7 +41,7 @@ class BlurImageWorker(
                 val imageBitmap = path.pathToBitmap()
                 val blurImage = blurBitmap(imageBitmap, 5)
                 val blurImagePath = blurImage.saveImage(applicationContext)
-                val saveToDatastore = repository.setProfilePicture(blurImagePath)
+                val saveToDatastore = UpdatePhotoProfileUseCase.saveProfilePicture(blurImagePath)
 
                 when (saveToDatastore) {
                     is DataStoreResult.Success ->

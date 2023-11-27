@@ -1,19 +1,12 @@
 package com.example.core.di
 
-import com.example.core.data.Repository
-import com.example.core.data.local.LocalDataStore
-import com.example.core.data.local.pref.UserDataStore
-import com.example.core.data.local.pref.userDataStore
-import com.example.core.data.remote.RemoteDataStore
 import com.example.core.data.remote.services.MoviesService
-import com.example.core.domain.repository.IRepository
 import com.example.core.utils.CoreConstant
 import com.example.core.utils.CoreConstant.AUTHORIZATION_HEADER_VALUE
 import com.example.core.utils.CoreConstant.MOVIES_URL
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -52,23 +45,10 @@ val networkModule = module {
     }
 }
 
-val userDataStoreModule = module {
-    single { UserDataStore(androidApplication().userDataStore) }
-}
-
-
-val localDataStoreModule = module {
-    factory { LocalDataStore(get()) }
-}
-
-val remoteDataSourceModule = module {
-    factory { RemoteDataStore(get()) }
-}
-
-val repositoryModule = module {
-    single { LocalDataStore(get()) }
-    single { RemoteDataStore(get()) }
-    single<IRepository> /*(named("repository"))*/ {
-        Repository(get(), get(), get())
-    }
-}
+//val repositoryModule = module {
+//    single { LocalDataStore(get()) }
+//    single { RemoteDataStore(get()) }
+//    single<IRepository> /*(named("repository"))*/ {
+//        Repository(get(), get(), WorkManager.getInstance(androidApplication()))
+//    }
+//}

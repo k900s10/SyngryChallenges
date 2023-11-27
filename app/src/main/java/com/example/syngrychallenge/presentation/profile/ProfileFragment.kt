@@ -122,7 +122,7 @@ class ProfileFragment : Fragment() {
         try {
             val uri: Uri = it ?: throw Exception(getString(R.string.missing_image))
 
-            viewModel.saveImage(uri)
+            viewModel.blurImage(uri)
         } catch (e: Exception) {
             Log.w("imagePickerIntent", e.toString())
             Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()

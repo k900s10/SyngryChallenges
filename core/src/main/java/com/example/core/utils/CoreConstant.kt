@@ -1,12 +1,27 @@
 package com.example.core.utils
 
 object CoreConstant {
+    //datastore preference message
+    const val CREATE_SESSION_FAILED = "Failed creating sessing"
+    const val WRONG_EMAIL_PASSWORD = "Email & password is wrong"
+
+    //Api message
+    const val EMPTY_DATA = "Data is empty"
+    const val REMOTE_REPOSITORY_TAG = "remoteRepository"
+    const val FAILED_TO_GET_API_RESPONSE = "Failed to get API response"
+
+    //Tag
+    const val AUTH_USE_CASE_TAG = "authUseCase"
+    const val GET_NEW_MOVIE_USE_CASE_TAG = "getNewMoviesUseCase"
+    const val GET_MOVIE_CASTS_USE_CASE_TAG = "getMovieCastsUseCase"
+    const val GET_POPULAR_MOVIES_USE_CASE_TAG = "getPopularMovies"
+
     //preference
     const val USER_PREF = "user_pref"
 
     //movie api url
-    val MOVIE_POSTER_URL = "https://image.tmdb.org/t/p/original/"
-    val MOVIES_URL = "https://api.themoviedb.org/3/"
+    const val MOVIE_POSTER_URL = "https://image.tmdb.org/t/p/original/"
+    const val MOVIES_URL = "https://api.themoviedb.org/3/"
 
     //movie api
     const val ACCEPT_HEADER_LABEL = "accept"
