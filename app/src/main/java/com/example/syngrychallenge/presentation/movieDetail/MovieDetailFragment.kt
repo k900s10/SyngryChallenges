@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.example.core.domain.model.NewMoviesModel
+import com.example.core.domain.model.MovieModel
 import com.example.core.presentation.CastsAdapter
 import com.example.core.utils.result.GetCastsResult
 import com.example.syngrychallenge.R
@@ -33,7 +33,7 @@ class MovieDetailFragment : Fragment() {
         ).movie
         val _adapter = CastsAdapter()
         val movieId = _movie.id
-        setUi(_movie)
+        setUI(_movie)
 
 
         viewModel.movieCasts(movieId).observe(viewLifecycleOwner) { result ->
@@ -56,7 +56,7 @@ class MovieDetailFragment : Fragment() {
         _binding = null
     }
 
-    private fun setUi(movie: NewMoviesModel) {
+    private fun setUI(movie: MovieModel) {
         binding.movie = movie
 
         Glide

@@ -3,15 +3,15 @@ package com.example.core.utils
 import com.example.core.data.remote.response.CastItem
 import com.example.core.data.remote.response.ResultsItem
 import com.example.core.domain.model.CastsModel
-import com.example.core.domain.model.NewMoviesModel
+import com.example.core.domain.model.MovieModel
 import com.example.core.utils.CoreUtils.trimScore
 import com.example.core.utils.CoreUtils.worldCalendarFormat
 
 
 object DataMapper {
-    fun mapNewMovieResponseToDomain(data: List<ResultsItem>): List<NewMoviesModel> =
+    fun mapNewMovieResponseToDomain(data: List<ResultsItem>): List<MovieModel> =
         data.map { response ->
-            NewMoviesModel(
+            MovieModel(
                 overview = response.overview ?: "",
                 title = response.title ?: "",
                 posterPath = response.posterPath ?: "",

@@ -2,7 +2,7 @@ package com.example.core.domain.usecase
 
 import android.util.Log
 import com.example.core.data.remote.response.ApiResponse
-import com.example.core.domain.model.NewMoviesModel
+import com.example.core.domain.model.MovieModel
 import com.example.core.domain.repository.RemoteRepository
 import com.example.core.utils.CoreConstant
 import com.example.core.utils.DataMapper
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class GetPopularMoviesUseCase(private val remoteRepository: RemoteRepository) {
-    fun getPopularMovies(): Flow<GetMoviesResult<List<NewMoviesModel>>> = flow {
+    fun getPopularMovies(): Flow<GetMoviesResult<List<MovieModel>>> = flow {
         try {
             when (val rawData = remoteRepository.getPopularMovies()) {
                 is ApiResponse.Success -> {

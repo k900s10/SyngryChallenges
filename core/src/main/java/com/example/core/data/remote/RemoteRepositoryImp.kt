@@ -28,7 +28,7 @@ class RemoteRepositoryImp(private val service: MoviesService) : RemoteRepository
             ApiResponse.Error(e.toString())
         }
 
-    override suspend fun getPopularMovies() : ApiResponse<List<ResultsItem>> =
+    override suspend fun getPopularMovies(): ApiResponse<List<ResultsItem>> =
         try {
             val response = service.getPopularMovies()
             val data = response.results
@@ -46,7 +46,7 @@ class RemoteRepositoryImp(private val service: MoviesService) : RemoteRepository
             ApiResponse.Error(e.toString())
         }
 
-    override suspend fun getMovieCredits(movieId: Int) : ApiResponse<List<CastItem>> =
+    override suspend fun getMovieCredits(movieId: Int): ApiResponse<List<CastItem>> =
         try {
             val response = service.getMovieCredits(movieId = movieId.toString())
             val data = response.cast
@@ -63,53 +63,4 @@ class RemoteRepositoryImp(private val service: MoviesService) : RemoteRepository
             Log.e(CoreConstant.REMOTE_REPOSITORY_TAG, "getPopularMovies: ", e)
             ApiResponse.Error(e.toString())
         }
-
-
-//    override fun getNewMovies(): Flow<ApiResponse<List<NewMoviesModel>>> = flow {
-//        try {
-//            val response = service.getNewMovies()
-//            val rawData = response.results
-//
-//            if (rawData.isNotEmpty()) {
-//                val newMovieModel = DataMapper.mapNewMovieResponseToDomain(rawData)
-//                emit(ApiResponse.Success(newMovieModel))
-//            } else {
-//                emit(ApiResponse.Empty)
-//            }
-//        } catch (e: Exception) {
-//            emit(ApiResponse.Error(e.toString()))
-//        }
-//    }.flowOn(Dispatchers.IO)
-
-//    override fun getPopularMovies(): Flow<ApiResponse<List<NewMoviesModel>>> = flow {
-//        try {
-//            val response = service.getPopularMovies()
-//            val rawData = response.results
-//
-//            if (rawData.isNotEmpty()) {
-//                val movies = DataMapper.mapNewMovieResponseToDomain(rawData)
-//                emit(ApiResponse.Success(movies))
-//            } else {
-//                emit(ApiResponse.Empty)
-//            }
-//        } catch (e: Exception) {
-//            emit(ApiResponse.Error(e.toString()))
-//        }
-//    }.flowOn(Dispatchers.IO)
-
-//    override fun getMovieCredits(movieId: Int): Flow<ApiResponse<List<CastsModel>>> = flow {
-//        try {
-//            val response = service.getMovieCredits(movieId = movieId.toString())
-//            val rawData = response.cast
-//            if (rawData.isNotEmpty()) {
-//                val casts = DataMapper.mapMovieCreditsToDomain(rawData)
-//                emit(ApiResponse.Success(casts))
-//            } else {
-//                emit(ApiResponse.Empty)
-//            }
-//        } catch (e: Exception) {
-//            ApiResponse.Error(e.toString())
-//        }
-//
-//    }.flowOn(Dispatchers.IO)
 }

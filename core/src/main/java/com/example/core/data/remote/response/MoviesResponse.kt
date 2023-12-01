@@ -4,7 +4,7 @@ import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Json
 
 @JsonClass(generateAdapter = true)
-data class NewMoviesResponse(
+data class MoviesResponse(
 
 	@Json(name="page")
 	val page: Int,

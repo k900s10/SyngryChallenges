@@ -9,4 +9,9 @@
     //worker
     <string name="saving_image_success">Successfully saving image</string>
     <string name="saving_image_failed">Failed saving image</string>
+
+    //movie showcase
+    <string name="tv_home_see_all_label">See all</string>
+    <string name="tv_home_popular_label">Trending Now</string>
+
 </resources>

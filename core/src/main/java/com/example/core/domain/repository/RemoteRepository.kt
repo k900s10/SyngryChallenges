@@ -10,4 +10,5 @@ interface RemoteRepository {
     suspend fun getMovieCredits(movieId: Int): ApiResponse<List<CastItem>>
 
     suspend fun getNewMovies(): ApiResponse<List<ResultsItem>>
+
 }

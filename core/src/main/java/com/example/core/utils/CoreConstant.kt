@@ -41,4 +41,7 @@ object CoreConstant {
     const val NOTIFICATION_ID = 1
         // The name of the image manipulation work
     const val KEY_IMAGE_URI = "KEY_IMAGE_URI"
+
+    //paging
+    const val INITIAL_PAGE_INDEX = 1
 }

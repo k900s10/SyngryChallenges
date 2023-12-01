@@ -1,6 +1,7 @@
 package com.example.core.presentation
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,16 +9,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.core.databinding.ItemMovieBinding
-import com.example.core.domain.model.NewMoviesModel
+import com.example.core.domain.model.MovieModel
 import com.example.core.utils.CoreConstant.MOVIE_POSTER_URL
 
-class HomeAdapter :
-    ListAdapter<NewMoviesModel, HomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
+class MoviesAdapter :
+    ListAdapter<MovieModel, MoviesAdapter.HomeViewHolder>(DIFF_CALLBACK) {
 
     private lateinit var setOnClickCallback: OnClickCallback
 
-    fun setOnClickCallback(onUpdatelickCallback: OnClickCallback) {
-        this.setOnClickCallback = onUpdatelickCallback
+    fun setOnClickCallback(onUpdateClickCallback: OnClickCallback) {
+        this.setOnClickCallback = onUpdateClickCallback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
@@ -27,13 +28,15 @@ class HomeAdapter :
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+        Log.d("homeAdapter", itemCount.toString())
+
         val movies = getItem(position)
         if (movies != null) {
             holder.bind(movies, holder.itemView.context)
 
             ItemMovieBinding.bind(holder.itemView).apply {
                 this.sivMoviePoster.setOnClickListener {
-                    setOnClickCallback.onItemClicked(movies, holder.itemView.context)
+                    setOnClickCallback.onItemClicked(movies)
                 }
             }
 //            holder.itemView.findViewById<ImageView>(R.id.siv_movie_poster).setOnClickListener {
@@ -43,13 +46,13 @@ class HomeAdapter :
     }
 
     interface OnClickCallback {
-        fun onItemClicked(movie: NewMoviesModel, context: Context)
+        fun onItemClicked(movie: MovieModel)
     }
 
 
     class HomeViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: NewMoviesModel, context: Context) {
+        fun bind(data: MovieModel, context: Context) {
             Glide
                 .with(context)
                 .load(MOVIE_POSTER_URL + data.posterPath)
@@ -58,12 +61,12 @@ class HomeAdapter :
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NewMoviesModel>() {
-            override fun areItemsTheSame(oldItem: NewMoviesModel, newItem: NewMoviesModel): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieModel>() {
+            override fun areItemsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: NewMoviesModel, newItem: NewMoviesModel): Boolean {
+            override fun areContentsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean {
                 return oldItem.id == newItem.id
             }
         }
