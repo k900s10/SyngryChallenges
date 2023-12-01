@@ -1,19 +1,23 @@
 package com.example.syngrychallenge.presentation.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.core.domain.model.MovieModel
+import com.example.core.domain.model.MoviesModel
+import com.example.core.presentation.MoviesAdapter
+import com.example.core.utils.CoreConstant
+import com.example.core.utils.result.GetMoviesResult
 import com.example.syngrychallenge.R
-import com.example.syngrychallenge.data.remote.response.ApiResponse
 import com.example.syngrychallenge.databinding.FragmentHomeBinding
-import com.example.syngrychallenge.domain.model.NewMoviesModel
-import com.example.syngrychallenge.utils.Util.safeNavigate
+import com.example.syngrychallenge.utils.AppUtils.safeNavigate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -32,14 +36,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val newMoviesAdapter = HomeAdapter()
-        val popularMoviesAdapter = HomeAdapter()
-        val rvNewMovie = binding.rvNewMovie
-        val rvTrendingMovie = binding.rvTrendingMovie
         val btnProfile = binding.ivProfile
-//        val username = HomeFragmentArgs.fromBundle(arguments as Bundle).username
-//
-//        binding.tvUsername.text = getString(R.string.tv_home_username, username)
+
         btnProfile.setOnClickListener {
             val destination =
                 HomeFragmentDirections.actionHomeFragmentToProfileFragment()
@@ -48,45 +46,54 @@ class HomeFragment : Fragment() {
 
         viewModel.popularMovies.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is ApiResponse.Success -> {
+                is GetMoviesResult.Success -> {
                     val movies = result.data
+                    val maxMovies = movies.maxMovies()
+
                     bindPoster(movies[0])
-                    popularMoviesAdapter.submitList(movies)
+//                    popularMoviesAdapter.submitList(maxMovies)
+
+                    val recyclerview = binding.includeTrendingMovies.rvMoviesList
+                    val label = binding.includeTrendingMovies.tvMoviesLabel
+
+                    recyclerview.populateMoviesList(maxMovies)
+                    //naming
+                    label.text = getString(R.string.tv_home_popular_label)
+                    label.setOnSeeAllClickListener(movies)
+
+                    binding.includeNewMovies.root.visibility = View.VISIBLE
+
                 }
 
-                is ApiResponse.Error ->
+                is GetMoviesResult.Failed -> {
                     Toast.makeText(activity, getString(R.string.response_failed), Toast.LENGTH_LONG)
                         .show()
-
-                is ApiResponse.Empty ->
-                    Toast.makeText(activity, getString(R.string.response_empty), Toast.LENGTH_LONG)
-                        .show()
+                    binding.includeNewMovies.root.visibility = View.GONE
+                }
             }
         }
 
         viewModel.newMovies.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is ApiResponse.Success -> {
-                    newMoviesAdapter.submitList(result.data)
+                is GetMoviesResult.Success -> {
+                    val movies = result.data
+                    val recyclerview = binding.includeNewMovies.rvMoviesList
+                    val label = binding.includeNewMovies.tvMoviesLabel
+
+                    recyclerview.populateMoviesList(movies.maxMovies())
+                    label.text = getString(R.string.tv_home_new_movie_label)
+                    label.setOnSeeAllClickListener(movies)
+                    binding.includeNewMovies.root.visibility = View.VISIBLE
+//                    newMoviesAdapter.submitList(maxMovies)
                 }
 
-                is ApiResponse.Error -> {
+                is GetMoviesResult.Failed -> {
                     Toast.makeText(activity, getString(R.string.response_failed), Toast.LENGTH_LONG)
                         .show()
-                }
-
-                is ApiResponse.Empty -> {
-                    Toast.makeText(activity, getString(R.string.response_empty), Toast.LENGTH_LONG)
-                        .show()
+                    binding.includeNewMovies.root.visibility = View.GONE
                 }
             }
         }
-        binding.rvNewMovie.adapter = newMoviesAdapter
-        binding.rvTrendingMovie.adapter = popularMoviesAdapter
-
-        popularMoviesAdapter.onClickPoster()
-        newMoviesAdapter.onClickPoster()
-
     }
 
     override fun onDestroyView() {
@@ -95,10 +102,44 @@ class HomeFragment : Fragment() {
 //        requireArguments().remove("username")
     }
 
-    private fun bindPoster(movie: NewMoviesModel) {
+    private fun RecyclerView.populateMoviesList(
+        movies: List<MovieModel>
+    ) {
+        val _adapter = MoviesAdapter()
+        val maxMovies = movies.maxMovies()
+
+        //adding adapter & set the click of each poster
+        _adapter.submitList(maxMovies)
+        this.adapter = _adapter
+        _adapter.onClickPoster()
+    }
+
+    private fun TextView.setOnSeeAllClickListener(movies: List<MovieModel>) {
+        //set see all navigation
+        this.setOnClickListener {
+            val destination =
+                HomeFragmentDirections.actionHomeFragmentToMoviesFragment(
+                    MoviesModel(movies),
+                    binding.includeTrendingMovies.tvMoviesLabel.text.toString()
+                )
+
+            findNavController().safeNavigate(destination)
+        }
+
+    }
+
+    //set the max of showable movie in recyclerview gridLayout
+    private fun List<MovieModel>.maxMovies(): List<MovieModel> =
+        if (this.size > 8)
+            this.take(8)
+        else
+            this
+
+
+    private fun bindPoster(movie: MovieModel) {
         Glide
             .with(requireActivity())
-            .load(getString(R.string.poster_url, movie.posterPath))
+            .load(CoreConstant.MOVIE_POSTER_URL + movie.posterPath)
             .into(binding.ivPromotionMoviePoster)
 
         binding.btnMovieShowcaseDetails.setOnClickListener {
@@ -106,14 +147,15 @@ class HomeFragment : Fragment() {
                 HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
                     movie
                 )
+
             findNavController().safeNavigate(destination)
         }
     }
 
-    private fun HomeAdapter.onClickPoster() {
+    private fun MoviesAdapter.onClickPoster() {
         this.setOnClickCallback(
-            object : HomeAdapter.OnClickCallback {
-                override fun onItemClicked(movie: NewMoviesModel, context: Context) {
+            object : MoviesAdapter.OnClickCallback {
+                override fun onItemClicked(movie: MovieModel) {
                     val destination =
                         HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
                             movie
@@ -121,6 +163,5 @@ class HomeFragment : Fragment() {
                     findNavController().safeNavigate(destination)
                 }
             })
-
     }
 }

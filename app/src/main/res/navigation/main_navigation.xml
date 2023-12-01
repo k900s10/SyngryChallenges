@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_homeFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_moviesFragment"
+            app:destination="@id/moviesFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -51,7 +54,7 @@
         android:label="MovieDetailFragment">
         <argument
             android:name="movie"
-            app:argType="com.example.syngrychallenge.domain.model.NewMoviesModel" />
+            app:argType="com.example.core.domain.model.MovieModel" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -62,6 +65,21 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="com.example.syngrychallenge.presentation.moviesList.MoviesFragment"
+        android:label="fragment_movies"
+        tools:layout="@layout/fragment_movies" >
+        <argument
+            android:name="movies"
+            app:argType="com.example.core.domain.model.MoviesModel" />
+        <action
+            android:id="@+id/action_moviesFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <argument
+            android:name="label"
+            app:argType="string"/>
     </fragment>
 
 </navigation>

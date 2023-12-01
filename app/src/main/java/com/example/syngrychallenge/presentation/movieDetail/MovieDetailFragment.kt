@@ -1,18 +1,17 @@
 package com.example.syngrychallenge.presentation.movieDetail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.core.domain.model.MovieModel
+import com.example.core.presentation.CastsAdapter
+import com.example.core.utils.result.GetCastsResult
 import com.example.syngrychallenge.R
-import com.example.syngrychallenge.data.remote.response.ApiResponse
 import com.example.syngrychallenge.databinding.FragmentMovieDetailBinding
-import com.example.syngrychallenge.domain.model.NewMoviesModel
-import com.example.syngrychallenge.presentation.profile.CastsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailFragment : Fragment() {
@@ -34,24 +33,18 @@ class MovieDetailFragment : Fragment() {
         ).movie
         val _adapter = CastsAdapter()
         val movieId = _movie.id
-        setUi(_movie)
+        setUI(_movie)
 
 
         viewModel.movieCasts(movieId).observe(viewLifecycleOwner) { result ->
             when (result) {
-                is ApiResponse.Success -> {
+                is GetCastsResult.Success -> {
                     _adapter.submitList(result.data)
-                    Log.d("pantek", _adapter.currentList.toString()  +"," + _adapter.itemCount)
                     binding.rvCasts.adapter = _adapter
                 }
 
-                is ApiResponse.Error -> {
+                is GetCastsResult.Failed -> {
                     Toast.makeText(activity, getString(R.string.response_failed), Toast.LENGTH_LONG)
-                        .show()
-                }
-
-                is ApiResponse.Empty -> {
-                    Toast.makeText(activity, getString(R.string.response_empty), Toast.LENGTH_LONG)
                         .show()
                 }
             }
@@ -63,7 +56,7 @@ class MovieDetailFragment : Fragment() {
         _binding = null
     }
 
-    private fun setUi(movie: NewMoviesModel) {
+    private fun setUI(movie: MovieModel) {
         binding.movie = movie
 
         Glide

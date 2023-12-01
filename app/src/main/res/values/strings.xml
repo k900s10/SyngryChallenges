@@ -32,9 +32,6 @@
     <string name="tv_prolog_label">Prolog</string>
     <string name="tv_movie_score">%s Score</string>
     <string name="tv_movie_duration">2h 2m</string>
-    <string name="tv_top_cast_label">Top Cast</string>
-    <string name="tv_cast_original_name">Willem Dafoe</string>
-    <string name="tv_cast_character">Gill (voice)</string>
 
     <!--  Home  -->
     <string name="tv_home_popular_label">Trending Now</string>
@@ -48,7 +45,8 @@
     <string name="logout_failed">Logout failed</string>
     <string name="register_failed">Register failed</string>
     <string name="update_profile_failed">Failed updating profile</string>
-
+    <string name="select_image">Select image</string>
+    <string name="missing_image">Image is missing</string>
 
     <!--  API  -->
     <string name="response_failed">Uknown error. Please restart the app</string>
